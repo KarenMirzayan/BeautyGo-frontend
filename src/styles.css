@@ -1,0 +1,28 @@
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  color: #11291B;
+  font-family: Roboto, sans-serif;
+}
+
+h1 {
+  font-size: 50px;
+}
+
+.container {
+  margin-top: 64px;
+}
+
+p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.grey-small {
+  font-size: 15px;
+  color: #646464;
+}
+

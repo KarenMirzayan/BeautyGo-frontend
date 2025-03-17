@@ -1,0 +1,40 @@
+.header-top {
+  width: 100%;
+  display: block;
+  padding-top: 20px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 40px;
+  align-items: center;
+  .a-top {
+    text-decoration: none;
+    color: #666666;
+  }
+  .header-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    a {
+      margin-left: 56px;
+    }
+  }
+}
+
+nav {
+  margin: 0 40px;
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.header-bot {
+}
+
+.nav-header {
+  padding: 25px 0;
+}
