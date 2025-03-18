@@ -1,0 +1,32 @@
+footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 40px;
+  padding-right: 138px;
+  height: 168px;
+  justify-content: space-between;
+  border-top: 1px solid #666666;
+}
+
+a, p {
+  color: #666666;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 136px 250px 144px;
+  grid-column-gap: 64px;
+  grid-row-gap: 32px;
+}
+
+.sn-links{
+  margin-left: 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  img {
+    vertical-align: bottom;
+  }
+}

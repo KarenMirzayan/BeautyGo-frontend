@@ -26,3 +26,9 @@ p {
   color: #646464;
 }
 
+a {
+  text-decoration: none;
+  display: block;
+  height: fit-content;
+}
+
