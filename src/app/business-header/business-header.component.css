@@ -1,0 +1,26 @@
+header {
+  height: 72px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /*width: fit-content;*/
+}
+
+.header-right a{
+  margin-left: 56px;
+}
+
+img {
+  vertical-align: bottom;
+}
+
+

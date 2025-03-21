@@ -4,7 +4,7 @@ body, html {
 }
 
 * {
-  color: #11291B;
+  color: #000;
   font-family: Roboto, sans-serif;
 }
 
@@ -32,3 +32,16 @@ a {
   height: fit-content;
 }
 
+.btn-main {
+  background-color: #F186AD;
+  border: none;
+  color: white;
+  padding: 16px 38px;
+  border-radius: 48px;
+  font-size: 16px;
+}
+
+.btn-main:hover {
+  background-color: #f16b9d;
+  cursor: pointer;
+}
