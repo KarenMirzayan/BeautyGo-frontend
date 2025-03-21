@@ -60,3 +60,7 @@
     text-align: center;
   }
 }
+
+app-contacts {
+  margin-bottom: 40px;
+}

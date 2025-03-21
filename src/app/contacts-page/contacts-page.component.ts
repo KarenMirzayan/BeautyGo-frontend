@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
 import {HeaderComponent} from "../header/header.component";
+import {ContactsComponent} from "../contacts/contacts.component";
 import {FooterComponent} from "../footer/footer.component";
 
 @Component({
-  selector: 'app-search',
+  selector: 'app-contacts-page',
   standalone: true,
   imports: [
     HeaderComponent,
+    ContactsComponent,
     FooterComponent
   ],
-  templateUrl: './search.component.html',
-  styleUrl: './search.component.css'
+  templateUrl: './contacts-page.component.html',
+  styleUrl: './contacts-page.component.css'
 })
-export class SearchComponent {
+export class ContactsPageComponent {
 
 }
