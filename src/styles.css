@@ -32,3 +32,32 @@ a {
   height: fit-content;
 }
 
+.montserrat-test {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.general-title {
+  margin-left: 40px;
+  margin-top: 50px;
+  color: #DE8EAB;
+  margin-bottom: 0;
+}
+
+.inter-common {
+  font-size:16px;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+}
+
+.thin-border {
+  background: none;
+  border-radius: 5px;
+  border: 0.05px solid black;
+}
+
+.thin-font {
+  font-weight: 300;
+}
