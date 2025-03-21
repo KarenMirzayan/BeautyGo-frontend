@@ -95,13 +95,6 @@
   color: #DE8EAB;
 }
 
-.montserrat-test {
-  font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
-}
-
 .product-cards {
   display: flex;
   flex-direction: row;
@@ -127,12 +120,7 @@
   }
 }
 
-.general-title {
-  margin-left: 40px;
-  margin-top: 50px;
-  color: #DE8EAB;
-  margin-bottom: 0;
-}
+
 
 .btm-text {
   .place-name {
