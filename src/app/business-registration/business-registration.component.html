@@ -1,0 +1,76 @@
+<!--<app-business-footer></app-business-footer>-->
+
+<h2 class="general-title montserrat-test">Регистрация</h2>
+<div class="container">
+  <div class="registration">
+    <form [formGroup]="businessForm" (ngSubmit)="submitForm()">
+      <div class="reg-section">
+        <h3 class="section-name inter-common">О себе</h3>
+        <div class="input-groups">
+          <div class="input-group">
+            <label class="inter-common" for="name">Имя:</label>
+            <input id="name" type="text" placeholder="Введите имя" class="thin-border" formControlName="firstName">
+          </div>
+          <div class="input-group">
+            <label class="inter-common" for="surname">Фамилия:</label>
+            <input id="surname" type="text" placeholder="Введите фамилию" class="thin-border" formControlName="lastName">
+          </div>
+          <div class="input-group">
+            <label class="inter-common" for="phone">Телефон:</label>
+            <input id="phone" type="text" placeholder="Введите телефон" class="thin-border" formControlName="phone">
+          </div>
+        </div>
+      </div>
+      <div class="reg-section">
+        <h3 class="section-name inter-common">Расположение</h3>
+        <div class="input-groups">
+          <div class="input-group">
+            <label class="inter-common" for="country">Страна:</label>
+            <input id="country" type="text" placeholder="Введите страну" class="thin-border" formControlName="country">
+          </div>
+          <div class="input-group">
+            <label class="inter-common" for="city">Город:</label>
+            <input id="city" type="text" placeholder="Введите город" class="thin-border" formControlName="city">
+          </div>
+        </div>
+      </div>
+      <div class="reg-section">
+        <h3 class="section-name inter-common">О компании</h3>
+        <div class="input-groups">
+          <div class="input-group">
+            <label class="inter-common" for="company-name">Название:</label>
+            <input id="company-name" type="text" placeholder="Введите название" class="thin-border" formControlName="companyName">
+          </div>
+          <div class="input-group">
+            <label class="inter-common" for="type">Тип компании:</label>
+            <input id="type" type="text" placeholder="Введите тип компании" class="thin-border" formControlName="companyType">
+          </div>
+          <div class="input-group">
+            <label class="inter-common">Количество мастеров:</label>
+            <div class="radio-buttons">
+              <div class="radio-button">
+                <input type="radio" formControlName="masterCount" value="1-5 мастеров" /> 1-5 мастеров
+              </div>
+              <div class="radio-button">
+                <input type="radio" formControlName="masterCount" value="Более 5 мастеров" /> Более 5 мастеров
+              </div>
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="inter-common" for="social">Сайт/социальные сети:</label>
+            <input id="social" type="text" placeholder="Вставьте ссылки" class="thin-border" formControlName="website">
+          </div>
+        </div>
+      </div>
+      <div class="textarea">
+        <label class="inter-common">Краткое описание бизнеса:</label>
+        <textarea formControlName="businessDescription" placeholder="Введите описание" class="thin-border"></textarea>
+      </div>
+      <button type="submit" class="btn-main">Отправить заявку</button>
+    </form>
+
+  </div>
+
+</div>
+
+<!--<app-business-header></app-business-header>-->
