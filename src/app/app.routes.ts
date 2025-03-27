@@ -9,6 +9,8 @@ import {BusinessRegistrationComponent} from "./business-registration/business-re
 import {BusinessHeaderFooterPageComponent} from "./business-header-footer-page/business-header-footer-page.component";
 import {HeaderFooterPageComponent} from "./header-footer-page/header-footer-page.component";
 import {BusinessJournalComponent} from "./business-journal/business-journal.component";
+import {BusinessSpecialistsComponent} from "./business-specialists/business-specialists.component";
+import {BusinessServicesComponent} from "./business-services/business-services.component";
 
 export const routes: Routes = [
   {path: "", component: HeaderFooterPageComponent, children: [
@@ -22,5 +24,7 @@ export const routes: Routes = [
       {path: "", component: BusinessMainComponent},
       {path: "register", component: BusinessRegistrationComponent},
       {path: "journal", component: BusinessJournalComponent},
+      {path: "specialists", component: BusinessSpecialistsComponent},
+      {path: "services", component: BusinessServicesComponent},
     ]}
 ];

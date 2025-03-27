@@ -1,0 +1,11 @@
+<div class="dropdown">
+  <button class="dropdown-btn thin-border inter-common" (click)="toggleDropdown()">
+    {{ selectedProfession }}
+    <span class="arrow"><img src="arrowhead_down.svg"></span>
+  </button>
+  <ul *ngIf="isDropdownOpen" class="dropdown-menu thin-border inter-common">
+    <li *ngFor="let profession of professions" (click)="selectProfession(profession)">
+      {{ profession }}
+    </li>
+  </ul>
+</div>

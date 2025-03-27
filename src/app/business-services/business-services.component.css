@@ -1,0 +1,150 @@
+.img-div {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+table {
+  border-radius: 5px;
+  border-spacing: 0;
+  border: 1px solid #666666;
+  table-layout: fixed;
+  max-width: 956px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+table tr:last-child td:first-child {
+  border-bottom-left-radius: 5px;
+}
+
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 5px;
+}
+
+table thead tr:first-child th:first-child {
+  border-top-left-radius: 5px;
+}
+
+table thead tr:first-child th:last-child {
+  border-top-right-radius: 5px;
+}
+
+table tbody {
+  border-bottom-right-radius: 5px;
+
+}
+
+td, th {
+  font-family: "Inter", sans-serif;
+  height: 60px;
+}
+
+thead th:nth-child(1) {
+  width: 32%;
+}
+
+thead th:nth-child(2) {
+  width: 17%;
+}
+
+thead th:nth-child(3) {
+  width: 17%;
+}
+
+thead th:nth-child(4) {
+  width: 17%;
+}
+
+thead th:nth-child(5) {
+  width: 17%;
+}
+
+tbody td{
+  border-top: 1px solid #666;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.first {
+  border-right: 1px solid #666;
+  text-align: left !important;
+  p {
+    margin-left: 40px;
+  }
+}
+
+.profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  font-family: "Inter", sans-serif;
+}
+
+.name {
+  font-weight: bold;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.phone {
+  font-weight: 300;
+  font-family: inherit;
+  font-size: 14px;
+}
+.search {
+  width: 200px;
+  position: relative;
+}
+.search input {
+  width: 152px;
+  padding: 10px 0 10px 48px;
+  font-size: 16px;
+  border: 1px solid #666666;
+}
+.search img {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.create-btn {
+  background-color: #F186AD;
+  border-radius: 5px;
+  padding: 10px 24px;
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+}
+
+.create-btn:hover{
+  background-color: #f16b9d;
+}
+
+.specialists-top {
+  margin-left: 40px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 32px;
+  gap: 24px;
+}
+
+.num_spec {
+  margin-left: 40px;
+  margin-top: 16px;
+  color: #929292;
+  font-weight: 600;
+}

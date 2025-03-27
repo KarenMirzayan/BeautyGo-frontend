@@ -68,7 +68,7 @@ a {
 .thin-border {
   background: none;
   border-radius: 5px;
-  border: 1px solid black;
+  border: 1px solid #666;
 }
 
 .thin-font {
