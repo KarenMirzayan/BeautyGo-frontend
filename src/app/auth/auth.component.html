@@ -1,0 +1,30 @@
+<div class="auth-container">
+  <div class="auth-tabs">
+    <span
+      [class.active]="isLoginMode"
+      (click)="toggleMode(true)">Вход</span>
+    <span
+      [class.active]="!isLoginMode"
+      (click)="toggleMode(false)">Регистрация</span>
+  </div>
+
+  <div class="auth-form">
+    <form (submit)="onSubmit()">
+      <input type="text" placeholder="Имя" [(ngModel)]="name" name="name" required>
+
+      <input *ngIf="!isLoginMode" type="text" placeholder="Номер телефона" [(ngModel)]="phone" name="phone" required>
+
+      <input *ngIf="isLoginMode" type="password" placeholder="Пароль" [(ngModel)]="password" name="password" required>
+
+      <input *ngIf="!isLoginMode" type="password" placeholder="Придумайте пароль" [(ngModel)]="password" name="password" required (input)="validatePasswords()">
+
+      <input *ngIf="!isLoginMode" type="password" placeholder="Повторите пароль" [(ngModel)]="password_confirmation" name="password_confirmation" required (input)="validatePasswords()">
+
+      <p *ngIf="!passwordsMatch && !isLoginMode" class="error-text">Пароли не совпадают</p>
+
+      <a href="#" *ngIf="isLoginMode">Забыли пароль?</a>
+
+      <button type="submit" [disabled]="!passwordsMatch">{{ isLoginMode ? 'Войти' : 'Зарегистрироваться' }}</button>
+    </form>
+  </div>
+</div>
