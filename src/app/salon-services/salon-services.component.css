@@ -1,0 +1,95 @@
+.body{
+    display: flex;
+    flex-direction: column;
+}
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.25);
+    width: 1036px;
+    height:55px;
+    margin-bottom: 20px;
+    margin-top: 34px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-self: center;
+}
+
+.search-img{
+    margin-left:20px;
+}
+
+.search-btn {
+    background: #F186AD;
+    width:154px;
+    height:44px;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 300;
+    margin:6px;
+}
+
+.search-btn:hover {
+    background: #d27793;
+}
+
+.services{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-left: 40px;
+    margin-bottom: 85px;
+    margin-top: 43px;
+}
+
+.service{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    h2{
+        margin:0;
+    }
+}
+
+.service-type{
+    display: flex;
+    flex-direction: row;
+    margin-left: 37px;
+    margin-right: 112px;
+    justify-content: space-between;
+    img{
+        width:30px;
+    }
+}
+
+.service-type-info{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+
+    .name{
+        font-size: 16px;
+        font-weight: 550 ;
+        font-family: "Inter", sans-serif;
+    }
+}
+
+.service-description{
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+    font-size:14px;
+
+    .price{
+        font-size:16px;
+    }
+
+    .time{
+        font-size: 14px;
+    }
+}

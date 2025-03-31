@@ -13,6 +13,7 @@ import {BusinessSpecialistsComponent} from "./business-specialists/business-spec
 import {BusinessServicesComponent} from "./business-services/business-services.component";
 import {AuthComponent} from "./auth/auth.component";
 import { SalonComponent } from './salon/salon.component';
+import { SalonServicesComponent } from './salon-services/salon-services.component';
 
 export const routes: Routes = [
   {path: "", component: HeaderFooterPageComponent, children: [
@@ -23,6 +24,7 @@ export const routes: Routes = [
       {path: "search", component: SearchComponent},
       {path:"authentication", component: AuthComponent},
       {path: "salon", component: SalonComponent},
+      {path: "salon/services", component: SalonServicesComponent},
     ]},
   {path: "business", component: BusinessHeaderFooterPageComponent, children: [
       {path: "", component: BusinessMainComponent},
