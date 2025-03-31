@@ -1,0 +1,153 @@
+.body{
+    display:flex;
+    flex-direction: column;   
+}
+
+.salon{
+    display:flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 90px;
+    margin-left: 142px;
+    .name{
+        margin:0;
+        font-size: 20px ;
+    }
+}
+
+.services{
+    display: flex;
+    flex-direction: column;
+    margin-top: 31px;
+    margin-left: 122px;
+    gap: 24px;
+}
+
+.service-type{
+    display: flex;
+    flex-direction: row;
+    margin-left: 37px;
+    margin-right: 112px;
+    justify-content: space-between;
+    img{
+        width:25px;
+    }
+}
+
+.service-type-info{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+
+    .name{
+        font-size: 16px;
+        font-weight: 550 ;
+        font-family: "Inter", sans-serif;
+    }
+}
+
+.service-description{
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+    font-size:14px;
+
+    .price{
+        font-size:16px;
+    }
+
+    .time{
+        font-size: 14px;
+    }
+}
+
+.masters {
+    display: grid;
+    grid-template-columns: repeat(5, 0.1fr);
+    gap: 21px 50px; 
+    margin-left: 122px;
+    margin-top: 81px;
+}
+
+.master{
+    width: 182px;
+    height: 224px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:21px;
+    /* background-color: lightcoral; */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
+
+    img{
+        width: 97px;
+        height: 97px;
+        margin-top: 23px;
+        border-radius: 50%;
+        background-color: #D9D9D9;
+    }
+}
+
+.master:hover,
+.master:focus {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.contacts{
+    display: flex;
+    flex-direction: row;
+    gap:31px;
+    margin-bottom: 27px;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    margin-left: 144px;
+    margin-top: 63px;
+    margin-bottom: 156px;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap:14px;
+
+    p{
+        font-size: 15px;
+        color:#666666;
+    }
+
+    input{
+        width:380px;
+        height:52px;
+        border-radius: 10px;
+        border: 0.5px solid #666;
+        font-size: 12px;
+    }
+
+    textarea{
+        width:791px;
+        height:78px;
+        border-radius: 10px;
+        border: 0.5px solid #666;
+        font-size: 12px;
+    }
+}
+
+.submit-btn {
+    background-color: #F186AD;
+    color: white;
+    border: none;
+    padding: 10px;
+    width:208px;
+    height:45px;
+    border-radius: 45px;
+    cursor: pointer;
+    font-size: 16px;
+    align-self:center;
+    margin-top: 80px;
+}
+
+
