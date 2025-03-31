@@ -46,12 +46,14 @@
 
 <div class="product-cards">
   <div class="product-card">
-    <img src="img.png" alt="Place">
-    <div class="btm-text">
-      <p class="place-name">Название салона</p>
-      <p class="grey-small">Адрес салона</p>
-      <p class="rating">9.5 ★</p>
-    </div>
+    <a routerLink="./salon/1">
+      <img src="img.png" alt="Place">
+      <div class="btm-text">
+        <p class="place-name">{{businesses.at(0)?.name}}</p>
+        <p class="grey-small">{{businesses.at(0)?.address}}</p>
+        <p class="rating">9.5 ★</p>
+      </div>
+    </a>
   </div>
   <div class="product-card">
     <img src="img.png" alt="Place">

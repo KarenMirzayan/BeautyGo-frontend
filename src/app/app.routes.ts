@@ -22,7 +22,7 @@ export const routes: Routes = [
       {path: "category", component: CategoryComponent},
       {path: "search", component: SearchComponent},
       {path:"authentication", component: AuthComponent},
-      {path: "salon", component: SalonComponent},
+      {path: "salon/:id", component: SalonComponent},
     ]},
   {path: "business", component: BusinessHeaderFooterPageComponent, children: [
       {path: "", component: BusinessMainComponent},

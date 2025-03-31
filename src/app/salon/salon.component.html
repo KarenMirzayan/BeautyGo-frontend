@@ -1,19 +1,17 @@
-<div class="box">
+<div class="box" *ngIf="business">
     <div class="info thin-border">
         <div class="description">
-            <h3 class="name">IMPALA BEAUTY BRAND</h3>
-            
+            <h3 class="name">{{ business.name }}</h3>
             <div class="rate">
                 <p class="rating name">4.0 ★</p>
                 <p class="thin-font">300 оценок</p>
             </div>
-            
 
             <div class="contacts">
                 <p class="name">О нас</p>
                 <div class="contact">
                     <img src="phone_call.svg" alt="Phone">
-                    <p class="thin-font">+7 777 77777 77</p>
+                    <p class="thin-font">{{ business.phone }}</p>
                 </div>
                 <div class="contact">
                     <img src="instagram.svg" alt="Instagram">
@@ -21,7 +19,7 @@
                 </div>
                 <div class="contact">
                     <img src="location.svg" alt="Location">
-                    <p class="thin-font">Location</p>
+                    <p class="thin-font">{{ business.address }}</p>
                 </div>
             </div>
             <img class="map" src="map.png" alt="Map">
@@ -136,7 +134,7 @@
                     <p class="inter-common profile-name">Айзада</p>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>
