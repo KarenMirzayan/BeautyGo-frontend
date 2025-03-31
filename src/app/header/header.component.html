@@ -5,7 +5,9 @@
       <div class="header-right">
         <a href="#" class="a-top">Стать партнёром</a>
         <a href="#" class="a-top">Стать партнёром</a>
-        <a href="#" class="a-top"><img src="profile.svg" alt="pfp"></a>
+        <a href="#" class="a-top" (click)="toggleDropdown()">
+          <img src="profile.svg" alt="pfp">
+        </a>
       </div>
     </div>
   </div>
@@ -22,5 +24,11 @@
       <a href="#">Тату</a>
       <a href="#">Пирсинг</a>
     </nav>
+  </div>
+
+  <div *ngIf="isDropdownOpen" class="dropdown-menu">
+    <a href="#" class="inter-common">Личный кабинет</a>
+    <a href="#" class="inter-common">История посещений</a>
+    <a href="#" class="inter-common">Войти/Выйти</a>
   </div>
 </header>

@@ -11,6 +11,7 @@ import {HeaderFooterPageComponent} from "./header-footer-page/header-footer-page
 import {BusinessJournalComponent} from "./business-journal/business-journal.component";
 import {BusinessSpecialistsComponent} from "./business-specialists/business-specialists.component";
 import {BusinessServicesComponent} from "./business-services/business-services.component";
+import {AuthComponent} from "./auth/auth.component";
 import { SalonComponent } from './salon/salon.component';
 
 export const routes: Routes = [
@@ -20,6 +21,7 @@ export const routes: Routes = [
       {path: "contacts", component: ContactsPageComponent},
       {path: "category", component: CategoryComponent},
       {path: "search", component: SearchComponent},
+      {path:"authentication", component: AuthComponent},
       {path: "salon", component: SalonComponent},
     ]},
   {path: "business", component: BusinessHeaderFooterPageComponent, children: [
@@ -28,5 +30,6 @@ export const routes: Routes = [
       {path: "journal", component: BusinessJournalComponent},
       {path: "specialists", component: BusinessSpecialistsComponent},
       {path: "services", component: BusinessServicesComponent},
-    ]}
+      {path:"authentication", component: AuthComponent},
+    ]},
 ];

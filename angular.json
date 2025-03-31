@@ -63,6 +63,9 @@
             },
             "development": {
               "buildTarget": "beauty-go:build:development"
+            },
+            "options": {
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
