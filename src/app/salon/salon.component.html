@@ -1,141 +1,91 @@
 <div class="box" *ngIf="business">
-    <div class="info thin-border">
-        <div class="description">
-            <h3 class="name">{{ business.name }}</h3>
-            <div class="rate">
-                <p class="rating name">4.0 ★</p>
-                <p class="thin-font">300 оценок</p>
-            </div>
+  <div class="info thin-border">
+    <div class="description">
+      <h3 class="name">{{ business.name }}</h3>
+      <div class="rate">
+        <p class="rating name">4.0 ★</p>
+        <p class="thin-font">300 оценок</p>
+      </div>
 
-            <div class="contacts">
-                <p class="name">О нас</p>
-                <div class="contact">
-                    <img src="phone_call.svg" alt="Phone">
-                    <p class="thin-font">{{ business.phone }}</p>
-                </div>
-                <div class="contact">
-                    <img src="instagram.svg" alt="Instagram">
-                    <p class="thin-font">Instagram</p>
-                </div>
-                <div class="contact">
-                    <img src="location.svg" alt="Location">
-                    <p class="thin-font">{{ business.address }}</p>
-                </div>
-            </div>
-            <img class="map" src="map.png" alt="Map">
-            <button class="apply-btn">Записаться</button>
+      <div class="contacts">
+        <p class="name">О нас</p>
+        <div class="contact">
+          <img src="phone_call.svg" alt="Phone">
+          <p class="thin-font">{{ business.phone }}</p>
         </div>
+        <div class="contact">
+          <img src="instagram.svg" alt="Instagram">
+          <p class="thin-font">Instagram</p>
+        </div>
+        <div class="contact">
+          <img src="location.svg" alt="Location">
+          <p class="thin-font">{{ business.address }}</p>
+        </div>
+      </div>
+      <div class="map">
+        <img src="map.png" alt="Map">
+      </div>
+      <button class="apply-btn">Записаться</button>
     </div>
+  </div>
 
-    <div class="photos">
-        <img class="main-img" src="img.png" alt="Салон красоты">
-        <div class="carousel">
-            <img class="arrow" src="arrow_left.svg" alt="Arrow left">
-            <div class="carousel-photos">
-                <img class="carousel-img" src="img.png" alt="Салон красоты">
-                <img class="carousel-img" src="img.png" alt="Салон красоты">
-                <img class="carousel-img" src="img.png" alt="Салон красоты">
-            </div>
-            <img class="arrow" src="arrow_right.svg" alt="Arrow right">
-        </div>
+  <div class="photos">
+    <img class="main-img" src="img.png" alt="Салон красоты">
+    <div class="carousel">
+      <img class="arrow" src="arrow_left.svg" alt="Arrow left">
+      <div class="carousel-photos">
+        <img class="carousel-img" src="img.png" alt="Салон красоты">
+        <img class="carousel-img" src="img.png" alt="Салон красоты">
+        <img class="carousel-img" src="img.png" alt="Салон красоты">
+      </div>
+      <img class="arrow" src="arrow_right.svg" alt="Arrow right">
     </div>
+  </div>
 </div>
 
 <div class="services">
+  <h2 class="general-title montserrat-test">Услуги</h2>
+  <div class="search-bar">
+    <img src="search.svg" alt="Search" class="search-img">
+    <button class="search-btn">Искать</button>
+  </div>
 
-    <h2 class="general-title montserrat-test">Услуги</h2>
-    <div class="search-bar">
-        <img src="search.svg" alt="Search" class="search-img">
-        <button class="search-btn">Искать</button>
+  <div class="service" *ngFor="let topic of groupedServices | keyvalue">
+    <h2>{{topic.key}}</h2>
+    <div *ngFor="let service of topic.value">
+      <a [routerLink]="['appointment', service.id]" class="service-type">
+        <div class="service-type-info">
+          <p class="name">{{service.name}}</p>
+          <div class="service-description thin-font">
+            <p class="price" *ngIf="service.highestPrice != 0">{{service.lowestPrice}} ₸ - {{service.highestPrice}} ₸</p>
+            <p class="price" *ngIf="service.highestPrice == 0">Бесплатно</p>
+            <p class="time">{{this.formatDuration(service.duration)}}</p>
+          </div>
+        </div>
+        <img src="arrow_right.svg" alt="Arrow right">
+      </a>
     </div>
-
-    <div class="service">
-        <h2>Стрижка волос</h2>
-        <div class="service-type">
-            <div class="service-type-info">
-                <p class="name">Стрижка женская</p>
-                <div class="service-description thin-font">
-                    <p class="price">10 000 ₸ - 15 000 ₸</p>
-                    <p class="time">1 час</p>
-                </div>
-            </div>
-            <img src="arrow_right.svg" alt="Arrow right">
-        </div>
-        <div class="service-type">
-            <div class="service-type-info">
-                <p class="name">Консультация hair-стилист</p>
-                <div class="service-description thin-font">
-                    <p >Бесплатно</p>
-                    <p>15 минут</p>
-                </div>
-            </div>
-            <img src="arrow_right.svg" alt="Arrow right">
-        </div>
-    </div>
-
-    <div class="service">
-        <h2>Окрашивание волос</h2>
-        <div class="service-type">
-            <div class="service-type-info">
-                <p class="name">Окрашивание корней волос</p>
-                <div class="service-description thin-font">
-                    <p>15 000 ₸ - 25 000 ₸</p>
-                    <p>1 час 30 минут</p>
-                </div>
-            </div>
-            <img src="arrow_right.svg" alt="Arrow right">
-        </div>
-        <div class="service-type">
-            <div class="service-type-info">
-                <p class="name">Окрашивание волос в один тон</p>
-                <div class="service-description thin-font">
-                    <p>30 000 ₸ - 60 000 ₸</p>
-                    <p>2 часа</p>
-                </div>
-            </div>
-            <img src="arrow_right.svg" alt="Arrow right">
-        </div>
-        <div class="service-type">
-            <div class="service-type-info">
-                <p class="name">Сложное окрашивание</p>
-                <div class="service-description thin-font">
-                    <p>45 000 ₸ - 120 000 ₸ </p>
-                    <p>2 часа 30 минут</p>
-                </div>
-            </div>
-            <img src="arrow_right.svg" alt="Arrow right">
-        </div>
-        <div class="service-type">
-            <div class="service-type-info">
-                <p class="name">Осветление волос маслом</p>
-                <div class="service-description thin-font">
-                    <p>45 000 ₸ - 70 000 ₸</p>
-                    <p>2 часа</p>
-                </div>
-            </div>
-            <img src="arrow_right.svg" alt="Arrow right">
-        </div>
-    </div>
+  </div>
 </div>
 
 <div class="reviews">
-    <h2 class="general-title montserrat-test">Отзывы</h2>
-    <p class="inter-common">★ Рейтинг: 4.0/5.0</p>
-    <div class="buttons">
-        <button class="review-btn inter-common">Все</button>
-        <button class="review-btn inter-common">Положительные</button>
-        <button class="review-btn inter-common">Отрицательные</button>
-    </div>
-    <div class="review-list">
-        <div class="review">
-            <div>
-                <div class="profile">
-                    <img class="profile-img" src="profile.jpg" alt="Profile">
-                    <p class="inter-common profile-name">Айзада</p>
-                </div>
-            </div>
-
+  <h2 class="general-title montserrat-test">Отзывы</h2>
+  <p class="inter-common">★ Рейтинг: 4.0/5.0</p>
+  <div class="buttons">
+    <button class="review-btn inter-common">Все</button>
+    <button class="review-btn inter-common">Положительные</button>
+    <button class="review-btn inter-common">Отрицательные</button>
+  </div>
+  <div class="review-list">
+    <div class="review">
+      <div>
+        <div class="profile">
+          <img class="profile-img" src="profile.jpg" alt="Profile">
+          <p class="inter-common profile-name">Айзада</p>
         </div>
+      </div>
+
     </div>
+  </div>
 </div>
 

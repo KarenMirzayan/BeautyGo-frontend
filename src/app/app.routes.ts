@@ -25,8 +25,8 @@ export const routes: Routes = [
       {path: "search", component: SearchComponent},
       {path:"authentication", component: AuthComponent},
       {path: "salon/:id", component: SalonComponent},
-      {path: "salon/services", component: SalonServicesComponent},
-      {path: "salon/appointment", component: SalonAppointmentComponent},
+      {path: "salon/:id/services", component: SalonServicesComponent},
+      {path: "salon/:business_id/appointment/:service_id", component: SalonAppointmentComponent},
     ]},
   {path: "business", component: BusinessHeaderFooterPageComponent, children: [
       {path: "", component: BusinessMainComponent},
