@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {StaffService} from '../staff.service';
 import {BusinessService} from '../business.service';
@@ -6,11 +6,15 @@ import {ServicesService} from '../services.service';
 import {CommonModule, NgForOf} from '@angular/common';
 import {Business, Service, Staff} from '../models';
 import {FormsModule} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 @Component({
   selector: 'app-salon-appointment',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule],
   templateUrl: './salon-appointment.component.html',
   styleUrl: './salon-appointment.component.css'
 })
@@ -18,12 +22,16 @@ export class SalonAppointmentComponent implements OnInit {
   business: Business | null = null;
   service: Service | null = null;
   staff: Staff[] = [];
-  selectedDate: Date | null = null;
-  selectedTime: string | null = null;
   availableTimes: string[] = ['10:00', '11:00', '11:30', '12:00'];
+  selectedTime: string = '';
+  selectedDate: string = '';
+  staff_id: number = 0;
 
-  minDate: string = '';
-  maxDate: string = '';
+  minDate: Date = new Date();
+
+  @ViewChild('nameInput') nameInput!: ElementRef;
+  @ViewChild('phoneInput') phoneInput!: ElementRef;
+  @ViewChild('commentInput') commentInput!: ElementRef;
 
   constructor(
     private businessService: BusinessService,
@@ -35,12 +43,7 @@ export class SalonAppointmentComponent implements OnInit {
   }
 
   setDateBounds() {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-    this.minDate = `${year}-${month}-${day}T09:00`;
-    this.maxDate = `${year}-${month}-${day}T18:00`;
+    this.minDate.setDate(this.minDate.getDate() + 1);
   }
 
   ngOnInit(): void {
@@ -68,5 +71,23 @@ export class SalonAppointmentComponent implements OnInit {
 
   selectTime(time: string) {
     this.selectedTime = time;
+  }
+
+  selectStaff(id: number) {
+    this.staff_id = id;
+  }
+
+  submitAppointment() {
+    const formData = {
+      service_id: this.service?.id,
+      staff_id: this.staff_id,
+      date: new Date(this.selectedDate).toISOString().split('T')[0],
+      start_time: this.selectedTime,
+      name: this.nameInput.nativeElement.value,
+      phone: this.phoneInput.nativeElement.value,
+      comment: this.commentInput.nativeElement.value,
+    };
+
+    console.log('Collected form data:', formData);
   }
 }

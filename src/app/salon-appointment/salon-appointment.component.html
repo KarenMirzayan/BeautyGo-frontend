@@ -1,18 +1,18 @@
 <div class="body">
   <div class="salon" *ngIf="business">
-    <h3 class="name">{{ business?.name }}</h3>
-    <p class="inter-common thin-font">{{ business?.category || 'Салон красоты' }}</p>
+    <h3 class="name">{{ business.name }}</h3>
+    <p class="inter-common thin-font">{{ business.category || 'Салон красоты' }}</p>
   </div>
 
   <h2 class="general-title montserrat-test">Выберите мастера</h2>
 
-  <div class="services" *ngIf="service">
+  <div class="service" *ngIf="service">
     <div class="service-type">
       <div class="service-type-info">
-        <p class="name">{{ service?.name }}</p>
+        <p class="name">{{ service.name }}</p>
         <div class="service-description thin-font">
-          <p class="price">{{ service?.lowestPrice }} ₸ - {{ service?.highestPrice }} ₸</p>
-          <p class="time">{{ service?.duration }} минут</p>
+          <p class="price">{{ service.lowestPrice }} ₸ - {{ service.highestPrice }} ₸</p>
+          <p class="time">{{ service.duration }} минут</p>
         </div>
       </div>
       <img src="close.svg" alt="Arrow right">
@@ -20,11 +20,11 @@
   </div>
 
   <div class="masters">
-    <div class="master">
+    <div class="master" (click)="selectStaff(0)" [class.selected]="staff_id === 0">
       <img class="master-any-img">
       <p>Любой мастер</p>
     </div>
-    <div class="master" *ngFor="let s of staff">
+    <div class="master" *ngFor="let s of staff" (click)="selectStaff(s.id)" [class.selected]="staff_id === s.id">
       <img class="master-any-img">
       <p>{{ s.name }}</p>
     </div>
@@ -32,11 +32,22 @@
 
   <h2 class="general-title montserrat-test">Выберите дату</h2>
 
-  <div class="time-slots">
-    <button *ngFor="let time of availableTimes" (click)="selectTime(time)" [class.selected]="time === selectedTime">
-      {{ time }}
-    </button>
+  <div class="date-picker-container">
+    <mat-form-field>
+      <mat-label>Дата</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" [min]="minDate"/>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <div class="time-slots">
+      <button *ngFor="let time of availableTimes" (click)="selectTime(time)" [class.selected]="time === selectedTime">
+        {{ time }}
+      </button>
+    </div>
   </div>
+
+
 
   <h2 class="general-title montserrat-test">Контактные данные</h2>
 
@@ -44,18 +55,18 @@
     <div class="contacts">
       <div class="form">
         <p class="inter-common">Имя:</p>
-        <input type="text" id="name" placeholder="Введите имя">
+        <input type="text" id="name" placeholder="Введите имя" #nameInput required>
       </div>
       <div class="form">
         <p class="inter-common">Телефон:</p>
-        <input type="tel" id="phone" placeholder="Введите телефон">
+        <input type="tel" id="phone" placeholder="Введите телефон" #phoneInput required>
       </div>
     </div>
     <div class="form">
       <p class="inter-common field">Оставьте комментарий:</p>
-      <textarea id="comment" placeholder="Комментарий"></textarea>
+      <textarea id="comment" placeholder="Комментарий" #commentInput></textarea>
     </div>
-    <button class="submit-btn">Записаться</button>
+    <button class="submit-btn" (click)="submitAppointment()">Записаться</button>
   </div>
 </div>
 

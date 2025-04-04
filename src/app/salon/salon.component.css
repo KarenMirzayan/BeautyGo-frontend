@@ -157,7 +157,7 @@ h3{
     background: #d27793;
 }
 
-.services{
+.service{
     display: flex;
     flex-direction: column;
     gap: 24px;
