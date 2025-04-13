@@ -1,81 +1,123 @@
-.body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
-    margin: 0;
-    padding: 0;
+.body{
     display: flex;
+    flex-direction: row;
+    gap:108px;
+    margin-bottom: 172px;
+    padding-top: 34px;
 }
-.container {
-    width: 70%;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+h2{
+    margin-bottom: 59px;
+    margin-left: 0px;
+    margin-top: 0px;
 }
+
 .profile {
-    text-align: center;
-    margin-bottom: 20px;
-    margin-left: 85px;
     display: flex;
     flex-direction: column;
-    gap: 35px;
+    align-items: center;
+    margin-left: 122px;
+    padding:0px;
 }
-.profile img {
-    width: 285px;
-    height: 285px;
+.photo {
+    position: relative; 
+    display: inline-block; 
+}
+
+.profile-img{
+    width:153px;
     border-radius: 50%;
-}
-
-.profile p {
-    font-size: 24px;
-}
-.edit-form {
-    margin-left: 208px;
-}
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
     display: block;
-    font-weight: bold;
 }
-/* .form-group input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-} */
 
-
-.form-group input {
-    width: 480px;
-    height: 70px;
-    /* padding: 8px; */
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    padding-left: 60px;
-    font-size: 24px;
+.add-btn{
+    border:none;
+    background-color: none;
 }
-.btn {
-    background-color: #F186AD;
-    color: white;
-    border: none;
-    padding: 10px;
-    /* width: 100%; */
-    width:350px;
-    height:70px;
-    border-radius: 20px;
+
+.add-img{
+    width:41px;
+    position: absolute; 
+    top: 65%; 
+    right: 10px; 
+    background: none; 
+    border: none; 
     cursor: pointer;
-    font-size: 24px;
-}
-.btn:hover {
-    background-color: #e57373;
 }
 
-.profile-buttons {
-    /* padding-top: 30px; */
+.name{
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+.number{
+    font-size: 16px;
+    margin-bottom: 65px;
+}
+
+.profile-btns{
     display: flex;
     flex-direction: column;
-    gap: 36px;
+    gap: 24px;
+}
+
+.btn{
+    background-color: #F186AD;
+    border-radius: 25px;
+    border:none;
+    color:white;
+    height:45px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.btn{
+    width: 231px;
+}
+
+.input-group{
+    margin: 10px 0;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.personal-data{
+    display: flex;
+    flex-direction: column;
+    gap:26px;
+    margin-bottom: 42px;
+}
+
+.personal-data input{
+    padding: 16px 26px ;
+    width:364px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    color: #666;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.gender-question{
+    display: flex;
+    flex-direction: column;
+    gap:17px;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 60px;
+}
+
+.options{
+    display: flex;
+    flex-direction: column;
+    gap:17px;
+}
+
+.line{
+    margin-top: 122px;
+    background-color: #929292;
+    height: 688px;
+    width:1px;
 }
