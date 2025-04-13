@@ -16,12 +16,14 @@ import { SalonComponent } from './salon/salon.component';
 import { SalonServicesComponent } from './salon-services/salon-services.component';
 import { SalonAppointmentComponent } from './salon-appointment/salon-appointment.component';
 import { HistoryComponent } from './history/history.component';
+import { ReviewComponent } from './review/review.component';
 
 export const routes: Routes = [
   {path: "", component: HeaderFooterPageComponent, children: [
       {path: "", component: MainComponent},
       {path: "account", component: PersonalAccountComponent},
       {path: "history", component: HistoryComponent},
+      {path: "review", component: ReviewComponent},
       {path: "contacts", component: ContactsPageComponent},
       {path: "category", component: CategoryComponent},
       {path: "search", component: SearchComponent},
