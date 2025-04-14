@@ -35,8 +35,9 @@ input[type=text] {
   width: 228px;
   height: 34px;
   border-radius: 10px;
-  padding-left: 22px;
+  padding: 0 0 0 22px;
   font-family: "Inter", sans-serif;
+  font-size: 14px;
 }
 
 .reg-section {
@@ -75,4 +76,8 @@ textarea {
 button {
   margin: 56px auto 48px;
   display: block;
+}
+
+app-dropdown .dropdown{
+  border-radius: 10px;
 }

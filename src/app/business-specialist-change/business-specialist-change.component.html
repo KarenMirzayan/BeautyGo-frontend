@@ -1,0 +1,40 @@
+<div *ngIf="isVisible" class="popup-overlay">
+  <div class="popup-content">
+    <div class="form-container">
+      <h2 class="montserrat-test">О специалисте</h2>
+      <form [formGroup]="specialistForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Имя:</label>
+            <input id="name" type="text" formControlName="name" placeholder="Введите имя" />
+          </div>
+          <div class="form-group">
+            <label for="surname">Фамилия:</label>
+            <input id="surname" type="text" formControlName="surname" placeholder="Введите фамилию" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">Телефон:</label>
+            <input id="phone" type="text" formControlName="phone" placeholder="+7 (777) 123 12 12" prefix="+7"
+                   [instantPrefix]="true" mask="(000) 000 00 00"/>
+          </div>
+        </div>
+        <div class="textarea form-group">
+          <label for="description">О специалисте:</label>
+          <textarea id="description" formControlName="description" placeholder=""></textarea>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label for="profession">Профессия:</label>
+          <input id="profession" type="text" formControlName="profession" placeholder="Введите название" />
+        </div>
+
+        <button type="submit" [disabled]="specialistForm.invalid">Сохранить</button>
+      </form>
+
+      <a class="delete">Удалить специалиста</a>
+    </div>
+  </div>
+</div>

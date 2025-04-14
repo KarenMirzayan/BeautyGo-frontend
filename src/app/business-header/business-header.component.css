@@ -23,4 +23,26 @@ img {
   vertical-align: bottom;
 }
 
+.dropdown-menu {
+  position: absolute;
+  right: 10px;
+  top: 80px;
+  background: white;
+  width: 168px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 32px 0;
+  z-index: 1;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.dropdown-menu a {
+  text-decoration: none;
+  color: black;
+  display: block;
+  cursor: pointer;
+}
 

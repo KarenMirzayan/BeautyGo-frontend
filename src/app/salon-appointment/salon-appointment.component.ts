@@ -54,16 +54,22 @@ export class SalonAppointmentComponent implements OnInit {
       if (businessId) {
         this.businessService.getBusiness(businessId).subscribe((data) => {
           this.business = data;
+          console.log("Business:");
+          console.log(data);
         });
       }
 
       if (serviceId) {
         this.servicesService.getService(serviceId).subscribe((data) => {
           this.service = data;
+          console.log("Service:");
+          console.log(data);
         });
 
-        this.staffService.getStaff(serviceId).subscribe((data) => {
+        this.staffService.getStaff(businessId).subscribe((data) => {
           this.staff = data;
+          console.log("Staff:");
+          console.log(data);
         });
       }
     });

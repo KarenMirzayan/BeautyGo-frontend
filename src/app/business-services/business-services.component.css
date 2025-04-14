@@ -109,9 +109,10 @@ tbody td{
 }
 .search input {
   width: 152px;
-  padding: 10px 0 10px 48px;
+  padding: 7px 0 7px 48px;
   font-size: 16px;
   border: 1px solid #666666;
+  border-radius: 10px;
 }
 .search img {
   position: absolute;
@@ -121,8 +122,8 @@ tbody td{
 
 .create-btn {
   background-color: #F186AD;
-  border-radius: 5px;
-  padding: 10px 24px;
+  border-radius: 10px;
+  padding: 7px 24px;
   font-size: 16px;
   color: white;
   font-weight: bold;

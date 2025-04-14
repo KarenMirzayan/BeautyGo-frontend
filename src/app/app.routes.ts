@@ -15,6 +15,7 @@ import {AuthComponent} from "./auth/auth.component";
 import { SalonComponent } from './salon/salon.component';
 import { SalonServicesComponent } from './salon-services/salon-services.component';
 import { SalonAppointmentComponent } from './salon-appointment/salon-appointment.component';
+import {BusinessPageComponent} from "./business-page/business-page.component";
 
 export const routes: Routes = [
   {path: "", component: HeaderFooterPageComponent, children: [
@@ -34,6 +35,7 @@ export const routes: Routes = [
       {path: "journal", component: BusinessJournalComponent},
       {path: "specialists", component: BusinessSpecialistsComponent},
       {path: "services", component: BusinessServicesComponent},
-      {path:"authentication", component: AuthComponent},
+      {path: "authentication", component: AuthComponent},
+      {path: "page", component: BusinessPageComponent},
     ]},
 ];

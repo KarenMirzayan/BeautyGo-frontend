@@ -8,11 +8,11 @@ import {Service, Staff} from "./models";
 })
 export class StaffService {
 
-  private apiUrl = "http://localhost:8080/staff";
+  private apiUrl = "http://localhost:8080/";
 
   constructor(private http: HttpClient) { }
 
   getStaff(id: number): Observable<Staff[]> {
-    return this.http.get<Staff[]>(`${this.apiUrl}/${id}`)
+    return this.http.get<Staff[]>(`${this.apiUrl}business/staff/${id}`)
   }
 }

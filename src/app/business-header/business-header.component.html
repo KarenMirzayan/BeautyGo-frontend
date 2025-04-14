@@ -4,7 +4,14 @@
     <a routerLink="./journal">Журнал</a>
     <a routerLink="./specialists">Персонал</a>
     <a routerLink="./services">Услуги</a>
-    <a href="#">Настройки</a>
-    <a href="#"><img src="profile.svg" alt="profile"></a>
+    <a routerLink="./page">Салон</a>
+    <a routerLink="./#" class="a-top" (click)="toggleDropdown()">
+      <img src="profile.svg" alt="pfp">
+    </a>
+  </div>
+
+  <div *ngIf="isDropdownOpen" class="dropdown-menu">
+    <a href="#" class="inter-common">Личный кабинет</a>
+    <a routerLink="./authentication" class="inter-common">Войти</a>
   </div>
 </header>

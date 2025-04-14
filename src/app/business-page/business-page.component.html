@@ -1,0 +1,87 @@
+<h2 class="general-title montserrat-test">Салон</h2>
+
+<div class="form-container">
+  <div class="header">
+    <h2>Аватар салона</h2>
+    <h2>Фотографии салона</h2>
+  </div>
+  <div class="image-section">
+    <div class="avatar-upload">
+      <label for="avatar-input">
+        <img *ngIf="avatarPreview" [src]="avatarPreview" alt="Avatar Preview"/>
+        <div *ngIf="!avatarPreview" class="placeholder">+</div>
+      </label>
+      <input id="avatar-input" type="file" (change)="onAvatarChange($event)" accept="image/*"/>
+    </div>
+    <div class="photos-upload">
+      <div *ngFor="let photo of photoPreviews; let i = index" class="photo-slot">
+        <label [for]="'photo-input-' + i">
+          <img *ngIf="photo" [src]="photo" alt="Photo Preview"/>
+          <div *ngIf="!photo" class="placeholder">+</div>
+        </label>
+        <input [id]="'photo-input-' + i" type="file" (change)="onPhotosChange($event, i)" accept="image/*"/>
+      </div>
+      <button class="upload-more">Добавить фото</button>
+    </div>
+  </div>
+
+  <form [formGroup]="salonForm" (ngSubmit)="onSubmit()">
+    <h2 id="about">О салоне</h2>
+    <div class="form-row">
+      <div class="left">
+        <div class="form-text">
+          <p class="inter-common">Название салона</p>
+          <p class="inter-common">Телефоны</p>
+        </div>
+        <div class="form-inputs">
+          <input type="text" formControlName="name"/>
+          <div class="phone-inputs">
+            <input
+              type="text"
+              formControlName="phone1"
+              placeholder="+7(999) 123 45 67"
+              mask="(000) 000 00 00"
+              prefix="+7"
+              [instantPrefix]="true"
+            />
+            <input
+              type="text"
+              formControlName="phone2"
+              placeholder="+7(999) 123 45 67"
+              mask="(000) 000 00 00"
+              prefix="+7"
+              [instantPrefix]="true"
+            />
+            <button type="button" class="add-phone">Добавить номер +</button>
+          </div>
+        </div>
+      </div>
+      <div class="form-address">
+        <p>Адрес</p>
+        <textarea formControlName="address"></textarea>
+      </div>
+    </div>
+
+
+    <div class="textarea">
+      <label>Описание салона</label>
+      <textarea formControlName="description"></textarea>
+    </div>
+
+    <div class="working-hours">
+      <p>Режим работы салона</p>
+      <div class="hours-section">
+        <span>с</span>
+        <select formControlName="startHour">
+          <option *ngFor="let hour of hours" [value]="hour">{{ hour }}</option>
+        </select>
+        <span>до</span>
+        <select formControlName="endHour">
+          <option *ngFor="let hour of hours" [value]="hour">{{ hour }}</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="salonForm.invalid">Сохранить</button>
+  </form>
+</div>

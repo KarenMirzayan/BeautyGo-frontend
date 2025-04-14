@@ -7,10 +7,11 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {MatNativeDateModule, provideNativeDateAdapter} from "@angular/material/core";
 import {registerLocaleData} from "@angular/common";
 import localeRu from '@angular/common/locales/ru';
+import {provideEnvironmentNgxMask} from "ngx-mask";
 
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({eventCoalescing: true}), provideRouter(routes), provideHttpClient(),
     provideAnimationsAsync(), importProvidersFrom(MatNativeDateModule), provideAnimationsAsync(),
-    { provide: LOCALE_ID, useValue: 'ru-RU' }]
+    { provide: LOCALE_ID, useValue: 'ru-RU' }, provideEnvironmentNgxMask()]
 };

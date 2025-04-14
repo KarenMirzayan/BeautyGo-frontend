@@ -1,0 +1,70 @@
+<div *ngIf="isVisible" class="popup-overlay">
+  <div class="popup-content">
+    <div class="form-container">
+      <h2 class="montserrat-test">Создать специалиста</h2>
+      <form [formGroup]="specialistForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Имя:</label>
+            <input id="name" type="text" formControlName="name" placeholder="Введите имя" />
+          </div>
+          <div class="form-group">
+            <label for="surname">Фамилия:</label>
+            <input id="surname" type="text" formControlName="surname" placeholder="Введите фамилию" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">Телефон:</label>
+            <input id="phone" type="text" formControlName="phone" placeholder="+7 (777) 123 12 12" prefix="+7"
+                   [instantPrefix]="true" mask="(000) 000 00 00"/>
+          </div>
+        </div>
+        <div class="textarea form-group">
+          <label for="description">О специалисте:</label>
+          <textarea id="description" formControlName="description" placeholder=""></textarea>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label for="profession">Профессия:</label>
+          <input id="profession" type="text" formControlName="profession" placeholder="Введите название" />
+        </div>
+
+<!--        <div class="form-group">-->
+<!--          <label>Расписание работы:</label>-->
+<!--          <div class="weekday">-->
+<!--            <input type="checkbox" id="mon" name="workday" value="ПН" />-->
+<!--            <label for="mon">ПН</label>-->
+<!--          </div>-->
+<!--          <div class="weekday">-->
+<!--            <input type="checkbox" id="tue" name="workday" value="ВТ" />-->
+<!--            <label for="tue">ВТ</label>-->
+<!--          </div>-->
+<!--          <div class="weekday">-->
+<!--            <input type="checkbox" id="wed" name="workday" value="СР" />-->
+<!--            <label for="wed">СР</label>-->
+<!--          </div>-->
+<!--          <div class="weekday">-->
+<!--            <input type="checkbox" id="thu" name="workday" value="ЧТ" />-->
+<!--            <label for="thu">ЧТ</label>-->
+<!--          </div>-->
+<!--          <div class="weekday">-->
+<!--            <input type="checkbox" id="fri" name="workday" value="ПТ" />-->
+<!--            <label for="fri">ПТ</label>-->
+<!--          </div>-->
+<!--          <div class="weekday">-->
+<!--            <input type="checkbox" id="sat" name="workday" value="СБ" />-->
+<!--            <label for="sat">СБ</label>-->
+<!--          </div>-->
+<!--          <div class="weekday">-->
+<!--            <input type="checkbox" id="sun" name="workday" value="ВС" />-->
+<!--            <label for="sun">ВС</label>-->
+<!--          </div>-->
+<!--        </div>-->
+
+        <button type="submit" [disabled]="specialistForm.invalid">Сохранить</button>
+      </form>
+    </div>
+  </div>
+</div>

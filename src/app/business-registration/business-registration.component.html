@@ -17,7 +17,8 @@
           </div>
           <div class="input-group">
             <label class="inter-common" for="phone">Телефон:</label>
-            <input id="phone" type="text" placeholder="Введите телефон" class="thin-border" formControlName="phone">
+            <input id="phone" type="text" placeholder="+7(777) 123 12 12" class="thin-border" formControlName="phone"
+            prefix="+7" [instantPrefix]="true" mask="(000) 000 00 00">
           </div>
         </div>
       </div>
@@ -25,12 +26,12 @@
         <h3 class="section-name inter-common">Расположение</h3>
         <div class="input-groups">
           <div class="input-group">
-            <label class="inter-common" for="country">Страна:</label>
-            <input id="country" type="text" placeholder="Введите страну" class="thin-border" formControlName="country">
-          </div>
-          <div class="input-group">
             <label class="inter-common" for="city">Город:</label>
             <input id="city" type="text" placeholder="Введите город" class="thin-border" formControlName="city">
+          </div>
+          <div class="input-group">
+            <label class="inter-common" for="address">Адрес:</label>
+            <input id="address" type="text" placeholder="Введите адрес" class="thin-border" formControlName="address">
           </div>
         </div>
       </div>
@@ -39,11 +40,11 @@
         <div class="input-groups">
           <div class="input-group">
             <label class="inter-common" for="company-name">Название:</label>
-            <input id="company-name" type="text" placeholder="Введите название" class="thin-border" formControlName="companyName">
+            <input id="company-name" type="text" placeholder="Введите название" class="thin-border" formControlName="name">
           </div>
           <div class="input-group">
-            <label class="inter-common" for="type">Тип компании:</label>
-            <input id="type" type="text" placeholder="Введите тип компании" class="thin-border" formControlName="companyType">
+            <label class="inter-common">Тип компании:</label>
+            <app-dropdown></app-dropdown>
           </div>
           <div class="input-group">
             <label class="inter-common">Количество мастеров:</label>

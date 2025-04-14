@@ -203,6 +203,7 @@
   border: none;
   background-color: #F186AD;
   color: white;
+  cursor: pointer;
 }
 
 .btn:hover {

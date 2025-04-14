@@ -8,15 +8,15 @@ import {Service} from "./models";
 })
 export class ServicesService {
 
-  private apiUrl = "http://localhost:8080/service";
+  private apiUrl = "http://localhost:8080/";
 
   constructor(private http: HttpClient) { }
 
   getServices(id: number): Observable<Service[]> {
-    return this.http.get<Service[]>(`${this.apiUrl}/${id}`)
+    return this.http.get<Service[]>(`${this.apiUrl}business/services/${id}`)
   }
 
   getService(id: number): Observable<Service> {
-    return this.http.get<Service>(`${this.apiUrl}/${id}`);
+    return this.http.get<Service>(`${this.apiUrl}service/${id}`);
   }
 }

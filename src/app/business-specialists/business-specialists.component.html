@@ -5,7 +5,7 @@
     <input type="text" placeholder="Поиск" class="inter-common thin-border">
   </div>
   <app-dropdown></app-dropdown>
-  <button class="create-btn">Создать специалиста</button>
+  <button class="create-btn" (click)="openPopupCreate()">Создать специалиста</button>
 </div>
 <p class="num_spec inter-common">Количество специалистов: 5</p>
 <div class="container">
@@ -22,7 +22,7 @@
     <tbody>
     <tr>
       <td class="first">
-        <div class="profile">
+        <div class="profile" (click)="openPopupUpdate()">
           <div class="img-div">
             <img src="pfp_placeholder.png" alt="Фото">
           </div>
@@ -108,3 +108,13 @@
     </tbody>
   </table>
 </div>
+
+<app-business-specialist-popup
+  [isVisible]="showPopupCreate"
+  (closePopup)="closePopupCreate()"
+></app-business-specialist-popup>
+
+<app-business-specialist-change
+  [isVisible]="showPopupUpdate"
+  (closePopup)="closePopupUpdate()"
+></app-business-specialist-change>
