@@ -19,6 +19,7 @@
     align-items: center;
     a {
       margin-left: 56px;
+      cursor: pointer;
     }
   }
 }
@@ -28,6 +29,7 @@ nav {
   a {
     text-decoration: none;
     color: inherit;
+    cursor: pointer;
   }
 }
 

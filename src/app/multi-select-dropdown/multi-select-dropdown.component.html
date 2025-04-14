@@ -1,0 +1,18 @@
+<div class="multi-select-dropdown">
+  <button class="dropdown-btn inter-common" (click)="toggleDropdown()">
+    {{ displayText }}
+    <span class="arrow"><img src="arrowhead_down.svg" alt="arrow"></span>
+  </button>
+  <ul *ngIf="isDropdownOpen" class="dropdown-menu inter-common">
+    <li *ngFor="let item of items" class="dropdown-item">
+      <label>
+        <input
+          type="checkbox"
+          [checked]="selectedIds.includes(item.id)"
+          (change)="toggleSelection(item.id)"
+        />
+        {{ item.name }}
+      </label>
+    </li>
+  </ul>
+</div>

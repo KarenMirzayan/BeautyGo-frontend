@@ -12,7 +12,15 @@ export class StaffService {
 
   constructor(private http: HttpClient) { }
 
-  getStaff(id: number): Observable<Staff[]> {
+  getStaffs(id: number): Observable<Staff[]> {
     return this.http.get<Staff[]>(`${this.apiUrl}business/staff/${id}`)
+  }
+
+  getStaff(id: number): Observable<Staff> {
+    return this.http.get<Staff>(`${this.apiUrl}staff/${id}`)
+  }
+
+  postStaff(staff: any) {
+    return this.http.post<Staff>(`${this.apiUrl}staff`, staff);
   }
 }

@@ -3,9 +3,9 @@
     <div class="row">
       <a href="#"> <img src="logo.svg" alt="BeautyGo"> </a>
       <div class="header-right">
-        <a href="#" class="a-top">Стать партнёром</a>
+        <a [routerLink]="['business']" class="a-top">Стать партнёром</a>
         <a href="#" class="a-top">Контакты</a>
-        <a routerLink="./#" class="a-top" (click)="toggleDropdown()">
+        <a class="a-top" (click)="toggleDropdown()">
           <img src="profile.svg" alt="pfp">
         </a>
       </div>
@@ -27,8 +27,8 @@
   </div>
 
   <div *ngIf="isDropdownOpen" class="dropdown-menu">
-    <a href="#" class="inter-common">Личный кабинет</a>
-    <a href="#" class="inter-common">История посещений</a>
+    <a routerLink="account" class="inter-common">Личный кабинет</a>
+    <a routerLink="history" class="inter-common">История посещений</a>
     <a routerLink="./authentication" class="inter-common">Войти</a>
   </div>
 </header>

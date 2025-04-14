@@ -35,6 +35,7 @@ export const routes: Routes = [
     ]},
   {path: "business", component: BusinessHeaderFooterPageComponent, children: [
       {path: "", component: BusinessMainComponent},
+      {path: "account", component: PersonalAccountComponent},
       {path: "register", component: BusinessRegistrationComponent},
       {path: "journal", component: BusinessJournalComponent},
       {path: "specialists", component: BusinessSpecialistsComponent},

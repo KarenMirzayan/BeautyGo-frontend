@@ -1,13 +1,18 @@
 <h2 class="general-title montserrat-test">Услуги</h2>
 <div class="specialists-top">
   <div class="search">
-    <img src="lupa.svg">
-    <input type="text" placeholder="Поиск" class="inter-common thin-border">
+    <img src="lupa.svg" alt="Search">
+    <input type="text" placeholder="Поиск" class="inter-common thin-border" (input)="onSearch($event)">
   </div>
-  <app-dropdown></app-dropdown>
-  <button class="create-btn">Добавить услугу</button>
+  <app-dropdown
+    [items]="topics"
+    [defaultText]="'Выберите категорию'"
+    (selectedValue)="onTopicSelected($event)">
+  </app-dropdown>
+  <button class="create-btn inter-common" (click)="openPopupCreate()">Добавить услугу</button>
 </div>
-<p class="num_spec inter-common">Количество услуг: 5</p>
+<p class="num_spec inter-common">Количество услуг: {{ filteredServices.length }}</p>
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
 <div class="container">
   <table>
     <thead>
@@ -20,41 +25,20 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td class="first" style="font-style: italic; font-weight: 550"><p>Укладка волос</p></td>
-      <td>10000 ₸</td>
-      <td>30 минут</td>
-      <td></td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td class="first" style="font-style: italic; font-weight: 550"><p>Коррекция челки</p></td>
-      <td>4000 ₸</td>
-      <td>30 минут</td>
-      <td></td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td class="first" style="font-style: italic; font-weight: 550"><p>Стрижка волос</p></td>
-      <td>6000 ₸</td>
-      <td>1 час</td>
-      <td></td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td class="first" style="font-style: italic; font-weight: 550"><p>Стрижка волос + укладка</p></td>
-      <td>15000 ₸</td>
-      <td>1 час 30 минут</td>
-      <td></td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td class="first" style="font-style: italic; font-weight: 550"><p>Детская стрижка</p></td>
-      <td>4000 ₸</td>
-      <td>30 минут</td>
-      <td></td>
-      <td>1</td>
+    <tr *ngFor="let service of filteredServices">
+      <td class="first" style="font-style: italic; font-weight: 550">
+        <p>{{ service.name }}</p>
+      </td>
+      <td>{{ service.lowestPrice }} ₸{{ service.highestPrice !== service.lowestPrice ? ' - ' + service.highestPrice + ' ₸' : '' }}</td>
+      <td>{{ formatDuration(service.duration) }}</td>
+      <td>{{ service.topic }}</td>
+      <td>{{ service.staffIds.length }}</td>
     </tr>
     </tbody>
   </table>
 </div>
+
+<app-business-service-create
+  [isVisible]="showPopupCreate"
+  (closePopup)="closePopupCreate($event)"
+></app-business-service-create>

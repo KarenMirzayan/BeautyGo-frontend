@@ -19,4 +19,8 @@ export class ServicesService {
   getService(id: number): Observable<Service> {
     return this.http.get<Service>(`${this.apiUrl}service/${id}`);
   }
+
+  postService(service: any) {
+    return this.http.post<any>(`${this.apiUrl}service`, service);
+  }
 }

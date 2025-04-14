@@ -12,10 +12,12 @@
         <p class="name">{{ service.name }}</p>
         <div class="service-description thin-font">
           <p class="price">{{ service.lowestPrice }} ₸ - {{ service.highestPrice }} ₸</p>
-          <p class="time">{{ service.duration }} минут</p>
+          <p class="time">{{this.formatDuration(service.duration)}}</p>
         </div>
       </div>
-      <img src="close.svg" alt="Arrow right">
+      <a (click)="goBack()" style="cursor: pointer">
+        <img src="close.svg" alt="Arrow right">
+      </a>
     </div>
   </div>
 

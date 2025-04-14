@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {StaffService} from '../staff.service';
 import {BusinessService} from '../business.service';
 import {ServicesService} from '../services.service';
-import {CommonModule, NgForOf} from '@angular/common';
+import {CommonModule, Location, NgForOf} from '@angular/common';
 import {Business, Service, Staff} from '../models';
 import {FormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -37,7 +37,8 @@ export class SalonAppointmentComponent implements OnInit {
     private businessService: BusinessService,
     private servicesService: ServicesService,
     private staffService: StaffService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location,
   ) {
     this.setDateBounds();
   }
@@ -62,13 +63,12 @@ export class SalonAppointmentComponent implements OnInit {
       if (serviceId) {
         this.servicesService.getService(serviceId).subscribe((data) => {
           this.service = data;
+          for (let master of this.service.staffIds) {
+            this.staffService.getStaff(master).subscribe((data)=> {
+              this.staff.push(data);
+            })
+          }
           console.log("Service:");
-          console.log(data);
-        });
-
-        this.staffService.getStaff(businessId).subscribe((data) => {
-          this.staff = data;
-          console.log("Staff:");
           console.log(data);
         });
       }
@@ -95,5 +95,22 @@ export class SalonAppointmentComponent implements OnInit {
     };
 
     console.log('Collected form data:', formData);
+  }
+
+  formatDuration(minutes: number): string {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+
+    if (hours > 0 && remainingMinutes > 0) {
+      return `${hours} час ${remainingMinutes} минут`;
+    } else if (hours > 0) {
+      return `${hours} час`;
+    } else {
+      return `${remainingMinutes} минут`;
+    }
+  }
+
+  goBack() {
+    this.location.back()
   }
 }

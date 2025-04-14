@@ -34,23 +34,16 @@
           <p class="inter-common">Телефоны</p>
         </div>
         <div class="form-inputs">
-          <input type="text" formControlName="name"/>
+          <input type="text" formControlName="name" [value]="business?.name"/>
           <div class="phone-inputs">
             <input
               type="text"
-              formControlName="phone1"
+              formControlName="phone"
               placeholder="+7(999) 123 45 67"
               mask="(000) 000 00 00"
               prefix="+7"
               [instantPrefix]="true"
-            />
-            <input
-              type="text"
-              formControlName="phone2"
-              placeholder="+7(999) 123 45 67"
-              mask="(000) 000 00 00"
-              prefix="+7"
-              [instantPrefix]="true"
+              [value]="business?.phone"
             />
             <button type="button" class="add-phone">Добавить номер +</button>
           </div>
@@ -58,14 +51,14 @@
       </div>
       <div class="form-address">
         <p>Адрес</p>
-        <textarea formControlName="address"></textarea>
+        <textarea formControlName="address" [value]="business?.address"></textarea>
       </div>
     </div>
 
 
     <div class="textarea">
       <label>Описание салона</label>
-      <textarea formControlName="description"></textarea>
+      <textarea formControlName="description" [value]="business?.description"></textarea>
     </div>
 
     <div class="working-hours">
@@ -82,6 +75,6 @@
       </div>
     </div>
 
-    <button type="submit" [disabled]="salonForm.invalid">Сохранить</button>
+    <button *ngIf="salonForm.dirty" type="submit" [disabled]="salonForm.invalid">Сохранить</button>
   </form>
 </div>

@@ -1,0 +1,65 @@
+<div *ngIf="isVisible" class="popup-overlay">
+  <div class="popup-content">
+    <div class="form-container">
+      <h2 class="montserrat-test">Добавить услугу</h2>
+      <form [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Название:</label>
+            <input id="name" type="text" formControlName="name" placeholder="Введите название" />
+            <div *ngIf="serviceForm.get('name')?.invalid && serviceForm.get('name')?.touched" class="error">
+              Название обязательно
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="lowestPrice">Цена (нижняя):</label>
+            <input id="lowestPrice" type="text" formControlName="lowestPrice" placeholder="2000" />
+            <div *ngIf="serviceForm.get('lowestPrice')?.invalid && serviceForm.get('lowestPrice')?.touched" class="error">
+              Введите корректную цену
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="duration">Длительность (в минутах):</label>
+            <input id="duration" type="text" formControlName="duration" placeholder="90" />
+            <div *ngIf="serviceForm.get('duration')?.invalid && serviceForm.get('duration')?.touched" class="error">
+              Введите корректную длительность
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="highestPrice">Цена (верхняя):</label>
+            <input id="highestPrice" type="text" formControlName="highestPrice" placeholder="10000" />
+            <div *ngIf="serviceForm.get('highestPrice')?.invalid && serviceForm.get('highestPrice')?.touched" class="error">
+              Введите корректную цену
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="topic">Категория:</label>
+            <input id="topic" type="text" formControlName="topic" placeholder="Стрижка волос" />
+            <div *ngIf="serviceForm.get('topic')?.invalid && serviceForm.get('topic')?.touched" class="error">
+              Категория обязательна
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Мастера:</label>
+            <app-multi-select-dropdown
+              [items]="staffMembers"
+              [placeholder]="'Выберите мастеров'"
+              (selectionChange)="onStaffSelectionChange($event)">
+            </app-multi-select-dropdown>
+            <div *ngIf="serviceForm.get('staffIds')?.invalid && serviceForm.get('staffIds')?.touched" class="error">
+              Выберите хотя бы одного мастера
+            </div>
+          </div>
+        </div>
+        <button type="submit" [disabled]="serviceForm.invalid">Сохранить</button>
+      </form>
+    </div>
+  </div>
+</div>

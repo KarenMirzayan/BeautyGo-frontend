@@ -1,8 +1,10 @@
-<!--<app-business-footer></app-business-footer>-->
-
 <h2 class="general-title montserrat-test">Регистрация</h2>
 <div class="container">
   <div class="registration">
+    <!-- Success/Error Messages -->
+    <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
     <form [formGroup]="businessForm" (ngSubmit)="submitForm()">
       <div class="reg-section">
         <h3 class="section-name inter-common">О себе</h3>
@@ -10,15 +12,24 @@
           <div class="input-group">
             <label class="inter-common" for="name">Имя:</label>
             <input id="name" type="text" placeholder="Введите имя" class="thin-border" formControlName="firstName">
+            <div *ngIf="businessForm.get('firstName')?.invalid && businessForm.get('firstName')?.touched" class="error">
+              Имя обязательно
+            </div>
           </div>
           <div class="input-group">
             <label class="inter-common" for="surname">Фамилия:</label>
             <input id="surname" type="text" placeholder="Введите фамилию" class="thin-border" formControlName="lastName">
+            <div *ngIf="businessForm.get('lastName')?.invalid && businessForm.get('lastName')?.touched" class="error">
+              Фамилия обязательна
+            </div>
           </div>
           <div class="input-group">
             <label class="inter-common" for="phone">Телефон:</label>
             <input id="phone" type="text" placeholder="+7(777) 123 12 12" class="thin-border" formControlName="phone"
-            prefix="+7" [instantPrefix]="true" mask="(000) 000 00 00">
+                   prefix="+7" [instantPrefix]="true" mask="(000) 000 00 00">
+            <div *ngIf="businessForm.get('phone')?.invalid && businessForm.get('phone')?.touched" class="error">
+              Телефон обязателен
+            </div>
           </div>
         </div>
       </div>
@@ -28,10 +39,16 @@
           <div class="input-group">
             <label class="inter-common" for="city">Город:</label>
             <input id="city" type="text" placeholder="Введите город" class="thin-border" formControlName="city">
+            <div *ngIf="businessForm.get('city')?.invalid && businessForm.get('city')?.touched" class="error">
+              Город обязателен
+            </div>
           </div>
           <div class="input-group">
             <label class="inter-common" for="address">Адрес:</label>
             <input id="address" type="text" placeholder="Введите адрес" class="thin-border" formControlName="address">
+            <div *ngIf="businessForm.get('address')?.invalid && businessForm.get('address')?.touched" class="error">
+              Адрес обязателен
+            </div>
           </div>
         </div>
       </div>
@@ -41,10 +58,20 @@
           <div class="input-group">
             <label class="inter-common" for="company-name">Название:</label>
             <input id="company-name" type="text" placeholder="Введите название" class="thin-border" formControlName="name">
+            <div *ngIf="businessForm.get('name')?.invalid && businessForm.get('name')?.touched" class="error">
+              Название обязательно
+            </div>
           </div>
           <div class="input-group">
             <label class="inter-common">Тип компании:</label>
-            <app-dropdown></app-dropdown>
+            <app-dropdown
+              [items]="categories"
+              [defaultText]="'Выберите категорию'"
+              (selectedValue)="onSelectionChange($event)">
+            </app-dropdown>
+            <div *ngIf="businessForm.get('topic')?.invalid && businessForm.get('topic')?.touched" class="error">
+              Категория обязательна
+            </div>
           </div>
           <div class="input-group">
             <label class="inter-common">Количество мастеров:</label>
@@ -56,22 +83,21 @@
                 <input type="radio" formControlName="masterCount" value="Более 5 мастеров" /> Более 5 мастеров
               </div>
             </div>
+            <div *ngIf="businessForm.get('masterCount')?.invalid && businessForm.get('masterCount')?.touched" class="error">
+              Выберите количество мастеров
+            </div>
           </div>
           <div class="input-group">
             <label class="inter-common" for="social">Сайт/социальные сети:</label>
-            <input id="social" type="text" placeholder="Вставьте ссылки" class="thin-border" formControlName="website">
+            <input id="social" type="text" placeholder="Вставьте ссылки" class="thin-border" formControlName="websites">
           </div>
         </div>
       </div>
       <div class="textarea">
         <label class="inter-common">Краткое описание бизнеса:</label>
-        <textarea formControlName="businessDescription" placeholder="Введите описание" class="thin-border"></textarea>
+        <textarea formControlName="description" placeholder="Введите описание" class="thin-border"></textarea>
       </div>
-      <button type="submit" class="btn-main">Отправить заявку</button>
+      <button type="submit" class="btn-main" [disabled]="businessForm.invalid">Отправить заявку</button>
     </form>
-
   </div>
-
 </div>
-
-<!--<app-business-header></app-business-header>-->

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CommonModule} from "@angular/common";
 
 @Component({
@@ -9,16 +9,24 @@ import {CommonModule} from "@angular/common";
   styleUrl: './dropdown.component.css'
 })
 export class DropdownComponent {
+  @Input() items: string[] = []; // Input for the list of dropdown items
+  @Input() defaultText: string = 'Выберите вариант'; // Optional input for default text
+  @Output() selectedValue = new EventEmitter<string>(); // Output to emit selected value
+
   isDropdownOpen = false;
-  selectedProfession = 'Все профессии'; // Default text
-  professions = ['Все профессии', 'Парикмахер', 'Визажист', 'Маникюрщик', 'Массажист'];
+  selectedItem: string;
+
+  constructor() {
+    this.selectedItem = this.defaultText;
+  }
 
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
-  selectProfession(profession: string) {
-    this.selectedProfession = profession;
+  selectItem(item: string) {
+    this.selectedItem = item;
     this.isDropdownOpen = false;
+    this.selectedValue.emit(item);
   }
 }

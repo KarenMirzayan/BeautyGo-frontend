@@ -1,11 +1,11 @@
 <div class="dropdown">
   <button class="dropdown-btn inter-common" (click)="toggleDropdown()">
-    {{ selectedProfession }}
-    <span class="arrow"><img src="arrowhead_down.svg"></span>
+    {{ selectedItem }}
+    <span class="arrow"><img src="arrowhead_down.svg" alt="arrow"></span>
   </button>
   <ul *ngIf="isDropdownOpen" class="dropdown-menu inter-common">
-    <li *ngFor="let profession of professions" (click)="selectProfession(profession)">
-      {{ profession }}
+    <li *ngFor="let item of items" (click)="selectItem(item)">
+      {{ item }}
     </li>
   </ul>
 </div>

@@ -3,7 +3,11 @@ export interface Business {
   name: string;
   phone: string;
   address: string;
+  description: string;
+  topic: string;
   category: string;
+  ownerId: number;
+  services: Service[];
 }
 
 export interface Service {
@@ -12,14 +16,26 @@ export interface Service {
   duration: number,
   highestPrice: number,
   lowestPrice: number,
-  business_id: number,
-  topic: string
+  businessId: number,
+  topic: string,
+  staffIds: number[]
 }
 
 export interface Staff {
   id: number,
   name: string,
+  surname: string,
   position: string,
-  businessId: number,
-  services: Service[],
+  phone: string,
+  business_id: number,
+  services: string[],
 }
+
+export interface User {
+  id: number;
+  fullname: string;
+  phoneNumber: string;
+  email: string | null;
+  role: string;
+}
+
