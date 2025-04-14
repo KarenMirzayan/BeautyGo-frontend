@@ -215,9 +215,11 @@ h3{
 
 .reviews{
     margin-left: 40px;
-    p{
+
+    .rating{
         margin-top: 24px;
         font-size: 20px;
+                
         font-weight: 350;
     }
 }
@@ -245,11 +247,72 @@ h3{
         border: none;
     }
 }
+.review-list{
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
 
-.profile-img{
-    width:48px;
-    border-radius: 50%;
-    background-color: lightgrey;
+    margin-top: 49px;
+    margin-bottom: 85px;
 }
+
+.review{
+    margin-left: 71px;
+    margin-right: 97px;
+
+    padding-left:50px;
+    padding-top: 13px;
+    padding-right: 76px;
+    padding-bottom: 27px;
+
+    border-radius: 35px;
+
+    display: flex;
+    flex-direction: column;
+    gap:13px;
+
+}
+
+.profile{
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+
+    .profile-img{
+        width:48px;
+        border-radius: 50%;
+        background-color: lightgrey;
+    }
+
+    p{
+        font-size: 16px;
+        margin-left: 35px;
+        margin-right: auto;
+    }
+
+    .stars{
+        margin-left: auto;
+        width:105px;
+    }
+}
+
+.comment{
+    font-size: 14px;
+}
+
+.date{
+    margin-left: auto;
+    color:#646464;
+}
+
+.about{
+    p{
+        margin-left: 71px;
+        margin-top: 33px;
+        margin-right: 97px;
+    }
+    margin-bottom: 200px;
+}
+
 
 
