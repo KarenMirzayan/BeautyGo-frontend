@@ -4,6 +4,7 @@ import {FooterComponent} from "../footer/footer.component";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {Business} from "../models";
 import {BusinessService} from "../business.service";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-main',
@@ -11,7 +12,8 @@ import {BusinessService} from "../business.service";
   imports: [
     HeaderComponent,
     FooterComponent,
-    RouterLink
+    RouterLink,
+    NgForOf
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'

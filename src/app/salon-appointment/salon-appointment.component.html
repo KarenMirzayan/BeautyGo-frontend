@@ -4,72 +4,103 @@
     <p class="inter-common thin-font">{{ business.category || 'Салон красоты' }}</p>
   </div>
 
-  <h2 class="general-title montserrat-test">Выберите мастера</h2>
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
 
-  <div class="service" *ngIf="service">
-    <div class="service-type">
-      <div class="service-type-info">
-        <p class="name">{{ service.name }}</p>
-        <div class="service-description thin-font">
-          <p class="price">{{ service.lowestPrice }} ₸ - {{ service.highestPrice }} ₸</p>
-          <p class="time">{{this.formatDuration(service.duration)}}</p>
+  <form [formGroup]="appointmentForm" (ngSubmit)="submitAppointment()">
+    <h2 class="general-title montserrat-test">Выберите мастера</h2>
+    <div class="service" *ngIf="service">
+      <div class="service-type">
+        <div class="service-type-info">
+          <p class="name">{{ service.name }}</p>
+          <div class="service-description thin-font">
+            <p class="price">{{ service.lowestPrice }} ₸{{ service.highestPrice !== service.lowestPrice ? ' - ' + service.highestPrice + ' ₸' : '' }}</p>
+            <p class="time">{{ formatDuration(service.duration) }}</p>
+          </div>
+        </div>
+        <a (click)="goBack()" style="cursor: pointer">
+          <img src="close.svg" alt="Close">
+        </a>
+      </div>
+    </div>
+
+    <div class="masters">
+      <div class="master" (click)="selectStaff(0)" [class.selected]="appointmentForm.get('staffId')?.value === 0">
+        <img class="master-any-img" alt="Any master">
+        <p>Любой мастер</p>
+      </div>
+      <div class="master" *ngFor="let s of staff" (click)="selectStaff(s.id)" [class.selected]="appointmentForm.get('staffId')?.value === s.id">
+        <img class="master-any-img" alt="Staff">
+        <p>{{ s.name }}</p>
+      </div>
+    </div>
+    <div *ngIf="appointmentForm.get('staffId')?.invalid && appointmentForm.get('staffId')?.touched" class="error">
+      Выберите мастера
+    </div>
+
+    <h2 class="general-title montserrat-test">Выберите дату и время</h2>
+    <div class="date-picker-container">
+      <div class="date-picker">
+        <mat-form-field>
+          <mat-label>Дата</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="date" [min]="minDate" placeholder="Выберите дату" (dateChange)="onDateChange($event.value)"/>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div *ngIf="appointmentForm.get('date')?.invalid && appointmentForm.get('date')?.touched" class="error">
+        Укажите дату
+      </div>
+
+      <div class="time-slots">
+        <div *ngIf="!availableTimes.length && appointmentForm.get('date')?.value" class="loading">
+          Загрузка доступных времен...
+        </div>
+        <button *ngFor="let time of availableTimes" (click)="selectTime(time)" [class.selected]="appointmentForm.get('time')?.value === time">
+          {{ time }}
+        </button>
+      </div>
+      <div *ngIf="appointmentForm.get('time')?.invalid && appointmentForm.get('time')?.touched" class="error">
+        Выберите время
+      </div>
+    </div>
+
+    <h2 class="general-title montserrat-test">Контактные данные</h2>
+    <div class="form-container">
+      <div class="contacts">
+        <div class="form">
+          <p class="inter-common">Имя:</p>
+          <input type="text" formControlName="name" placeholder="Введите имя"/>
+          <div *ngIf="appointmentForm.get('name')?.invalid && appointmentForm.get('name')?.touched" class="error">
+            Имя обязательно
+          </div>
+        </div>
+        <div class="form">
+          <p class="inter-common">Электронная почта:</p>
+          <input type="email" formControlName="email" placeholder="Введите email"/>
+          <div *ngIf="appointmentForm.get('email')?.invalid && appointmentForm.get('email')?.touched" class="error">
+            Укажите корректный email
+          </div>
+        </div>
+        <div class="form">
+          <p class="inter-common">Телефон:</p>
+          <input
+            type="tel"
+            formControlName="phone"
+            placeholder="+7(999) 123 45 67"
+            mask="(000) 000 00 00"
+            prefix="+7"
+            [instantPrefix]="true"
+          />
+          <div *ngIf="appointmentForm.get('phone')?.invalid && appointmentForm.get('phone')?.touched" class="error">
+            Укажите корректный телефон
+          </div>
         </div>
       </div>
-      <a (click)="goBack()" style="cursor: pointer">
-        <img src="close.svg" alt="Arrow right">
-      </a>
-    </div>
-  </div>
-
-  <div class="masters">
-    <div class="master" (click)="selectStaff(0)" [class.selected]="staff_id === 0">
-      <img class="master-any-img">
-      <p>Любой мастер</p>
-    </div>
-    <div class="master" *ngFor="let s of staff" (click)="selectStaff(s.id)" [class.selected]="staff_id === s.id">
-      <img class="master-any-img">
-      <p>{{ s.name }}</p>
-    </div>
-  </div>
-
-  <h2 class="general-title montserrat-test">Выберите дату</h2>
-
-  <div class="date-picker-container">
-    <mat-form-field>
-      <mat-label>Дата</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" [min]="minDate"/>
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-
-    <div class="time-slots">
-      <button *ngFor="let time of availableTimes" (click)="selectTime(time)" [class.selected]="time === selectedTime">
-        {{ time }}
-      </button>
-    </div>
-  </div>
-
-
-
-  <h2 class="general-title montserrat-test">Контактные данные</h2>
-
-  <div class="form-container">
-    <div class="contacts">
       <div class="form">
-        <p class="inter-common">Имя:</p>
-        <input type="text" id="name" placeholder="Введите имя" #nameInput required>
+        <p class="inter-common field">Оставьте комментарий:</p>
+        <textarea formControlName="notes" placeholder="Комментарий"></textarea>
       </div>
-      <div class="form">
-        <p class="inter-common">Телефон:</p>
-        <input type="tel" id="phone" placeholder="Введите телефон" #phoneInput required>
-      </div>
+      <button *ngIf="appointmentForm.dirty" class="submit-btn" type="submit" [disabled]="appointmentForm.invalid">Записаться</button>
     </div>
-    <div class="form">
-      <p class="inter-common field">Оставьте комментарий:</p>
-      <textarea id="comment" placeholder="Комментарий" #commentInput></textarea>
-    </div>
-    <button class="submit-btn" (click)="submitAppointment()">Записаться</button>
-  </div>
+  </form>
 </div>
-
-

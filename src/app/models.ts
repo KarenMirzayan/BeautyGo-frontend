@@ -39,3 +39,15 @@ export interface User {
   role: string;
 }
 
+export interface AvailableTimeSlot {
+  id: number | null;
+  serviceId: number;
+  staffId: number;
+  businessId: number;
+  customerName: string | null;
+  customerEmail: string | null;
+  customerPhone: string | null;
+  startTime: string;
+  status: string | null;
+  notes: string | null;
+}

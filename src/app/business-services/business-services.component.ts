@@ -2,10 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {DropdownComponent} from "../dropdown/dropdown.component";
 import {BusinessSpecialistPopupComponent} from "../business-specialist-popup/business-specialist-popup.component";
 import {BusinessServiceCreateComponent} from "../business-service-create/business-service-create.component";
-import {Service} from "../models";
+import {Business, Service, User} from "../models";
 import {BusinessService} from "../business.service";
 import {ServicesService} from "../services.service";
 import {CommonModule} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-business-services',
@@ -24,19 +25,44 @@ export class BusinessServicesComponent implements OnInit{
   services: Service[] = [];
   filteredServices: Service[] = [];
   topics: string[] = [];
-  businessId: number = 5;
+  business: Business | null = null;
   errorMessage: string | null = null;
   searchTerm: string = '';
   selectedTopic: string = '';
+  user: User | null;
 
-  constructor(private businessService: BusinessService, private servicesService: ServicesService) {}
+  constructor(private businessService: BusinessService, private servicesService: ServicesService, private router: Router) {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      try {
+        this.user = JSON.parse(userData) as User;
+      } catch (error) {
+        console.error('Error parsing user from localStorage:', error);
+        this.user = null;
+      }
+    } else {
+      this.user = null;
+      console.log('No user found in localStorage');
+      this.router.navigate(['business', 'login']);
+    }
 
-  ngOnInit(): void {
-    this.loadServices();
+    this.businessService.getBusinessByOwner(this.user?.id || 0).subscribe({
+      next: (response) => {
+        console.log('Business loaded:', response);
+        this.business = response;
+        this.loadServices();
+      },
+      error: (error) => {
+        console.error('Error loading business:', error);
+        this.router.navigate(['business', 'register']);
+      }
+    });
   }
 
+  ngOnInit(): void {}
+
   loadServices(): void {
-    this.servicesService.getServices(this.businessId).subscribe({
+    this.servicesService.getServices(this.business?.id || 0).subscribe({
       next: (data) => {
         console.log('Services loaded:', data);
         this.services = data;

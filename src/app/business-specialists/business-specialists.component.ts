@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { BusinessSpecialistPopupComponent } from '../business-specialist-popup/business-specialist-popup.component';
 import { BusinessSpecialistChangeComponent } from '../business-specialist-change/business-specialist-change.component';
-import { Staff } from '../models';
+import {Business, Staff, User} from '../models';
 import { StaffService } from '../staff.service';
 import { NgForOf } from '@angular/common';
+import {BusinessService} from "../business.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-business-specialists',
@@ -26,15 +28,41 @@ export class BusinessSpecialistsComponent implements OnInit {
   positions: string[] = [];
   searchTerm: string = '';
   selectedPosition: string = '';
+  business: Business | null = null;
+  user: User | null = null;
 
-  constructor(private staffService: StaffService) {}
+  constructor(private staffService: StaffService, private businessService: BusinessService, private router: Router) {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      try {
+        this.user = JSON.parse(userData) as User;
+      } catch (error) {
+        console.error('Error parsing user from localStorage:', error);
+        this.user = null;
+      }
+    } else {
+      this.user = null;
+      console.log('No user found in localStorage');
+      this.router.navigate(['business', 'login']);
+    }
 
-  ngOnInit(): void {
-    this.loadStaff();
+    this.businessService.getBusinessByOwner(this.user?.id || 0).subscribe({
+      next: (response) => {
+        console.log('Business loaded:', response);
+        this.business = response;
+        this.loadStaff();
+      },
+      error: (error) => {
+        console.error('Error loading business:', error);
+        this.router.navigate(['business', 'register']);
+      }
+    });
   }
 
+  ngOnInit(): void {}
+
   loadStaff(): void {
-    this.staffService.getStaffs(5).subscribe({
+    this.staffService.getStaffs(this.business?.id || 0).subscribe({
       next: (data) => {
         console.log('Staff loaded:', data);
         this.staff = data;
@@ -82,6 +110,7 @@ export class BusinessSpecialistsComponent implements OnInit {
     this.searchTerm = (event.target as HTMLInputElement).value.toLowerCase();
     this.applyFilters();
   }
+
   applyFilters(): void {
     let tempStaff = this.staff;
     if (this.searchTerm) {

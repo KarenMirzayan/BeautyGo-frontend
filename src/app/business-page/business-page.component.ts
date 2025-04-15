@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { NgxMaskDirective } from 'ngx-mask';
 import { BusinessService } from '../business.service';
-import { Business } from '../models';
+import {Business, User} from '../models';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-business-page',
@@ -21,12 +22,25 @@ export class BusinessPageComponent implements OnInit {
   salonForm: FormGroup;
   hours: string[] = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, '0')}:00`);
   minutes: string[] = ['00', '15', '30', '45'];
+  user: User | null;
 
   avatarPreview: string | ArrayBuffer | null = null;
   photoPreviews: (string | ArrayBuffer | null)[] = [null, null, null];
 
-  constructor(private fb: FormBuilder, private businessService: BusinessService) {
-    // Initialize form with default values
+  constructor(private fb: FormBuilder, private businessService: BusinessService, private router: Router) {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      try {
+        this.user = JSON.parse(userData) as User;
+      } catch (error) {
+        console.error('Error parsing user from localStorage:', error);
+        this.user = null;
+      }
+    } else {
+      this.user = null;
+      console.log('No user found in localStorage');
+      this.router.navigate(['business', 'login']);
+    }
     this.salonForm = this.fb.group({
       // avatar: [null],
       // photos: [[]],
@@ -50,7 +64,7 @@ export class BusinessPageComponent implements OnInit {
   }
 
   loadBusiness(): void {
-    this.businessService.getBusiness(5).subscribe({
+    this.businessService.getBusinessByOwner(this.user?.id || 0).subscribe({
       next: (response) => {
         console.log('Business loaded:', response);
         this.business = response;
@@ -58,6 +72,7 @@ export class BusinessPageComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error loading business:', error);
+        this.router.navigate(['business', 'register']);
       }
     });
   }

@@ -45,39 +45,15 @@
 <h2 class="general-title montserrat-test">Маникюр</h2>
 
 <div class="product-cards">
-  <div class="product-card">
-    <a routerLink="./salon/{{businesses.at(0)?.id}}">
+  <div class="product-card" *ngFor="let business of businesses">
+    <a routerLink="./salon/{{business.id}}">
       <img src="img.png" alt="Place">
       <div class="btm-text">
-        <p class="place-name">{{businesses.at(0)?.name}}</p>
-        <p class="grey-small">{{businesses.at(0)?.address}}</p>
+        <p class="place-name">{{business.name}}</p>
+        <p class="grey-small">{{business.address}}</p>
         <p class="rating">9.5 ★</p>
       </div>
     </a>
-  </div>
-  <div class="product-card">
-    <img src="img.png" alt="Place">
-    <div class="btm-text">
-      <p class="place-name">Название салона</p>
-      <p class="grey-small">Адрес салона</p>
-      <p class="rating">9.5 ★</p>
-    </div>
-  </div>
-  <div class="product-card">
-    <img src="img.png" alt="Place">
-    <div class="btm-text">
-      <p class="place-name">Название салона</p>
-      <p class="grey-small">Адрес салона</p>
-      <p class="rating">9.5 ★</p>
-    </div>
-  </div>
-  <div class="product-card">
-    <img src="img.png" alt="Place">
-    <div class="btm-text">
-      <p class="place-name">Название салона</p>
-      <p class="grey-small">Адрес салона</p>
-      <p class="rating">9.5 ★</p>
-    </div>
   </div>
 </div>
 

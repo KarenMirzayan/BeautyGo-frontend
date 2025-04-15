@@ -57,7 +57,7 @@
         <div class="service-type-info">
           <p class="name">{{service.name}}</p>
           <div class="service-description thin-font">
-            <p class="price" *ngIf="service.highestPrice != 0">{{service.lowestPrice}} ₸ - {{service.highestPrice}} ₸</p>
+            <p class="price" *ngIf="service.highestPrice != 0">{{ service.lowestPrice }} ₸{{ service.highestPrice !== service.lowestPrice ? ' - ' + service.highestPrice + ' ₸' : '' }}</p>
             <p class="price" *ngIf="service.highestPrice == 0">Бесплатно</p>
             <p class="time">{{this.formatDuration(service.duration)}}</p>
           </div>
@@ -78,7 +78,7 @@
   </div>
 
   <div class="review-list">
-    
+
     <div class="review thin-border">
         <div class="profile">
           <img class="profile-img" src="profile.jpg" alt="Profile">
@@ -94,14 +94,7 @@
 
   <div class="about">
     <h2 class="general-title montserrat-test">О нас</h2>
-    <p>IMPALA BEAUTY BRAND-салон красоты премиум класса.
-      Impala-высококвалифицированные специалисты
-      Impala-безопасность и стерильность
-      Impala-авторский дизайн проект пространства
-      Impala-the highest level of service
-      Impala-lux продукция и материалы
-      Impala-особенное меню и расслабляющие коктейли
-    </p>
+    <p>{{this.business?.description}}</p>
   </div>
 
 </div>

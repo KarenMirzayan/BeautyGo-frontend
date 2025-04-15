@@ -27,4 +27,8 @@ export class BusinessService {
   putBusiness(business: any){
     return this.http.put<any>(`${this.apiUrl}`, business);
   }
+
+  getBusinessByOwner(id: number): Observable<Business> {
+    return this.http.get<Business>(`${this.apiUrl}/owner/${id}`);
+  }
 }

@@ -102,19 +102,21 @@
   flex-direction: row;
   gap: 31px;
   margin-bottom: 27px;
+  width: fit-content;
 }
 
 .form-container {
   display: flex;
   flex-direction: column;
   margin: 62px auto 156px;
+  width: fit-content;
 }
 
 .form {
   display: flex;
   flex-direction: column;
   gap: 14px;
-
+  width: fit-content;
   p {
     font-size: 15px;
     color: #666666;
@@ -168,11 +170,10 @@ input[type=datetime-local] {
 }
 
 .time-slots {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 24px;
   width: fit-content;
-  align-items: center;
 }
 
 .time-slots button {
@@ -192,4 +193,15 @@ input[type=datetime-local] {
 .master.selected {
   border: 2px solid #F186AD;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.submit-btn:disabled {
+  background: #666;
+  cursor: not-allowed;
 }

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Business, Service} from "../models";
 import {BusinessService} from "../business.service";
-import {KeyValuePipe, NgForOf, NgIf} from "@angular/common";
+import {CommonModule, KeyValuePipe} from "@angular/common";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {ServicesService} from "../services.service";
 
@@ -9,8 +9,7 @@ import {ServicesService} from "../services.service";
   selector: 'app-salon',
   standalone: true,
   imports: [
-    NgIf,
-    NgForOf,
+    CommonModule,
     KeyValuePipe,
     RouterLink
   ],
