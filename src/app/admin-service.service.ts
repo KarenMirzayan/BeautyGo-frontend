@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {BusinessApplicationDto} from "./models";
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminServiceService {
-  private apiUrl = 'http://localhost:8080/admin/businessApplications'; // Adjust the base URL as needed
+  private apiUrl = `${environment.apiUrl}/admin/businessApplications`; // Adjust the base URL as needed
 
   constructor(private http: HttpClient) {}
 

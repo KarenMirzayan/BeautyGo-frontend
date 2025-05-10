@@ -155,11 +155,11 @@ export class HistoryComponent implements OnInit {
   }
 
   navigateToReview(reservationId: number): void {
-    this.router.navigate([`/review/${reservationId}`]);
+    this.router.navigate([`/history/${reservationId}`]);
   }
 
-  bookAgain(): void {
-    this.router.navigate(['book']);
+  bookAgain(route: string): void {
+    this.router.navigate([]);
   }
 
   protected readonly Object = Object;

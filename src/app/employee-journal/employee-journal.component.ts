@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {ReservationDisplay, ReservationDto, TimeSlot} from "../models";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-employee-journal',
@@ -58,7 +59,7 @@ export class EmployeeJournalComponent implements OnInit {
 
     const dateStr = this.selectedDate.toISOString().split('T')[0];
     this.http
-      .get<ReservationDto[]>(`http://localhost:8080/api/reservations/staff/${this.staffId}?date=${dateStr}`)
+      .get<ReservationDto[]>(`${environment.apiUrl}/api/reservations/staff/${this.staffId}?date=${dateStr}`)
       .subscribe({
         next: (reservations) => {
           this.reservations = reservations;

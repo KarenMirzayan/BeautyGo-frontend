@@ -3,115 +3,78 @@
 <div class="reviews-page">
   <div class="filters">
     <div class="filters-top">
-      <img src="filter.svg" alt="Фильтры">
+      <img src="/filter.svg" alt="Фильтры">
       <p class="filter-text">Фильтры</p>
     </div>
-    <a class="clear">Очистить</a>
+    <a class="clear" (click)="clearFilters()">Очистить</a>
     <p class="filter-category">По статусу</p>
     <div class="filter-group">
       <div class="filter">
-        <input type="checkbox" id="pending">
+        <input type="checkbox" id="pending" [(ngModel)]="filters.status.pending">
         <label for="pending">Ожидает проверки</label>
       </div>
       <div class="filter">
-        <input type="checkbox" id="published">
+        <input type="checkbox" id="published" [(ngModel)]="filters.status.published">
         <label for="published">Опубликован</label>
-      </div>
-      <div class="filter">
-        <input type="checkbox" id="blocked">
-        <label for="blocked">Заблокирован</label>
       </div>
     </div>
     <p class="filter-category">Рейтинг</p>
     <div class="filter-group">
       <div class="filter">
-        <input type="checkbox" id="5">
+        <input type="checkbox" id="5" [(ngModel)]="filters.rating[5]">
         <label for="5">С рейтингом 5</label>
       </div>
       <div class="filter">
-        <input type="checkbox" id="4">
+        <input type="checkbox" id="4" [(ngModel)]="filters.rating[4]">
         <label for="4">С рейтингом 4</label>
       </div>
       <div class="filter">
-        <input type="checkbox" id="3">
+        <input type="checkbox" id="3" [(ngModel)]="filters.rating[3]">
         <label for="3">С рейтингом 3</label>
       </div>
       <div class="filter">
-        <input type="checkbox" id="2">
+        <input type="checkbox" id="2" [(ngModel)]="filters.rating[2]">
         <label for="2">С рейтингом 2</label>
       </div>
       <div class="filter">
-        <input type="checkbox" id="1">
+        <input type="checkbox" id="1" [(ngModel)]="filters.rating[1]">
         <label for="1">С рейтингом 1</label>
       </div>
     </div>
-    <button class="btn-main">Применить</button>
+    <button class="btn-main" (click)="applyFilters()">Применить</button>
   </div>
   <div class="right">
     <div class="reviews-top">
-      <p class="inter-common">3 непроверенных отзыва</p>
+      <p class="inter-common">{{ pendingCount }} непроверенных отзыва</p>
       <app-dropdown
         [items]="orderby"
         [defaultText]="'По дате подачи'"
-        [defaultIsSelectable]="true">
+        [defaultIsSelectable]="true"
+        (selectedValue)="onSortChange($event)">
       </app-dropdown>
     </div>
     <div class="reviews">
-      <div>
-        <div class="review">
-          <div class="review-top">
-            <div class="profile">
-              <div class="pfp-mask">
-                <img class="profile-img" src="profile.svg" alt="Profile">
-              </div>
-              <div class="profile-text">
-                <p class="inter-common">Название салона</p>
-                <p class="inter-common specialist">Специалист</p>
-              </div>
+      <div class="review" [class.published]="review.verified" *ngFor="let review of filteredReviews">
+        <div class="review-top">
+          <div class="profile">
+            <div class="pfp-mask">
+              <img class="profile-img" src="/profile.svg" alt="Profile">
             </div>
-            <app-stars [rating]="4"></app-stars>
+            <div class="profile-text">
+              <p class="inter-common">{{ review.businessName || 'Название салона' }}</p>
+              <p class="inter-common specialist">{{ review.staffName || 'Специалист' }}</p>
+            </div>
           </div>
-          <p class="comment">“Осталась очень довольна услугой покраски волос! Мастер учёл все мои пожелания,
-            помог подобрать идеальный оттенок и выполнил работу аккуратно. Цвет получился ровным, волосы после
-            процедуры
-            выглядят ухоженными и блестящими. Спасибо за профессионализм и внимательное отношение! Обязательно приду
-            ещё
-            раз.”</p>
-          <div class="review-bottom">
-            <p class="status">Ожидает проверки</p>
-            <p class="name-date">Айзада Сатаева · 2 дня назад</p>
-          </div>
-          <div class="buttons">
-            <button class="btn-main">Опубликовать</button>
-            <button class="delete btn-main">Удалить</button>
-          </div>
+          <app-stars [rating]="review.rating"></app-stars>
         </div>
-      </div>
-
-      <div>
-        <div class="published review">
-          <div class="review-top">
-            <div class="profile">
-              <div class="pfp-mask">
-                <img class="profile-img" src="profile.svg" alt="Profile">
-              </div>
-              <div class="profile-text">
-                <p class="inter-common">Название салона</p>
-                <p class="inter-common specialist">Специалист</p>
-              </div>
-            </div>
-            <app-stars [rating]="5"></app-stars>
-          </div>
-          <p class="comment">“Осталась очень довольна услугой покраски волос! Мастер учёл все мои пожелания,
-            помог подобрать идеальный оттенок и выполнил работу аккуратно. Цвет получился ровным, волосы после
-            процедуры
-            выглядят ухоженными и блестящими. Спасибо за профессионализм и внимательное отношение! Обязательно приду
-            ещё
-            раз.”</p>
-          <div class="review-bottom">
-            <p class="status">Опубликован</p>
-            <p class="name-date">Айзада Сатаева · 2 дня назад</p>
-          </div>
+        <p class="comment">{{ review.comment || 'Нет комментария' }}</p>
+        <div class="review-bottom">
+          <p class="status">{{ review.verified ? 'Опубликован' : 'Ожидает проверки' }}</p>
+          <p class="name-date">{{ review.customerName }} · {{ formatDate(review.createdAt) }}</p>
+        </div>
+        <div class="buttons" *ngIf="!review.verified">
+          <button class="btn-main" (click)="verifyReview(review.id)">Опубликовать</button>
+          <button class="delete btn-main" (click)="deleteReview(review.id)">Удалить</button>
         </div>
       </div>
     </div>

@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ReservationDto} from "./models";
+import {Observable} from "rxjs";
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationsService {
-  private apiUrl = 'http://localhost:8080/api/reservations';
+  private apiUrl = `${environment.apiUrl}/api/reservations`;
 
   constructor(private http: HttpClient) {}
 
@@ -18,5 +20,9 @@ export class ReservationsService {
   getHistoricReservations(phone:string) {
     const encodedPhone = encodeURIComponent(phone);
     return this.http.get<ReservationDto[]>(`${this.apiUrl}/client/history?phone=${encodedPhone}`)
+  }
+
+  getReservation(reservationId:number): Observable<ReservationDto> {
+    return this.http.get<ReservationDto>(`${this.apiUrl}/${reservationId}`);
   }
 }

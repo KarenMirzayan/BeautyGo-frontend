@@ -25,8 +25,7 @@
           </div>
           <div class="input-group">
             <label class="inter-common" for="phone">Телефон:</label>
-            <input id="phone" type="text" placeholder="+7(777) 123 12 12" class="thin-border" formControlName="phone"
-                   prefix="+7" [instantPrefix]="true" mask="(000) 000 00 00">
+            <input id="phone" type="text" placeholder="+7 777 123 12 12" class="thin-border" formControlName="phone" mask="+0 000 000 00 00" [dropSpecialCharacters]="false">
             <div *ngIf="businessForm.get('phone')?.invalid && businessForm.get('phone')?.touched" class="error">
               Телефон обязателен
             </div>

@@ -1,4 +1,4 @@
-.container { 
+.container {
     margin: 0 auto; /* Центрируем контейнер */
     padding: 40px; /* Отступы внутри */
     position: relative; /* Для абсолютного позиционирования .history */
@@ -47,10 +47,10 @@
 
 .description {
     display: grid;
-    grid-template-columns: 1fr 1fr; 
-    grid-template-rows: auto auto; 
-    column-gap: 109px; 
-    row-gap: 42px; 
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 109px;
+    row-gap: 42px;
 
     margin-top: 87px;
 }
@@ -73,7 +73,7 @@
     display: flex;
     flex-direction: row;
     gap:18px;
-    
+
     img{
         border-radius: 50%;
         width:45px;
@@ -93,7 +93,7 @@
         font-weight: 500;
     }
     img{
-        width:105px;
+        width:24px
     }
 }
 
@@ -132,4 +132,8 @@ button{
 
 button{
     width: 208px;
+}
+
+star{
+  height: 20px;
 }

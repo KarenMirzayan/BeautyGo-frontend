@@ -1,33 +1,32 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+// src/app/business-page/business-page.component.ts
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgxMaskDirective } from 'ngx-mask';
 import { BusinessService } from '../business.service';
-import {Business, User} from '../models';
-import {Router} from "@angular/router";
+import { Business, User } from '../models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-business-page',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    CommonModule,
-    NgxMaskDirective
-  ],
+  imports: [ReactiveFormsModule, CommonModule, NgxMaskDirective],
   templateUrl: './business-page.component.html',
-  styleUrls: ['./business-page.component.css']
+  styleUrls: ['./business-page.component.css'],
 })
 export class BusinessPageComponent implements OnInit {
   business: Business | undefined;
   salonForm: FormGroup;
-  hours: string[] = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, '0')}:00`);
-  minutes: string[] = ['00', '15', '30', '45'];
   user: User | null;
+  photoPreviews: (string | null)[] = [null, null, null]; // Initial 3 slots
+  photoFiles: (File | null)[] = [null, null, null]; // Store File objects
+  hours: string[] = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, '0')}:00`);
 
-  avatarPreview: string | ArrayBuffer | null = null;
-  photoPreviews: (string | ArrayBuffer | null)[] = [null, null, null];
-
-  constructor(private fb: FormBuilder, private businessService: BusinessService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private businessService: BusinessService,
+    private router: Router
+  ) {
     const userData = localStorage.getItem('user');
     if (userData) {
       try {
@@ -42,20 +41,14 @@ export class BusinessPageComponent implements OnInit {
       this.router.navigate(['business', 'login']);
     }
     this.salonForm = this.fb.group({
-      // avatar: [null],
-      // photos: [[]],
       name: ['', Validators.required],
       address: ['', Validators.required],
       phone: ['', Validators.required],
       description: [''],
-      // startHour: [''],
-      // startMinute: [''],
-      // endHour: [''],
-      // endMinute: [''],
       id: [null, Validators.required],
       ownerId: [null, Validators.required],
-      topic: [null, Validators.required],
-      services: [null, Validators.required],
+      topic: ['', Validators.required],
+      services: [[]],
     });
   }
 
@@ -69,11 +62,12 @@ export class BusinessPageComponent implements OnInit {
         console.log('Business loaded:', response);
         this.business = response;
         this.patchForm();
+        this.loadImages();
       },
       error: (error) => {
         console.error('Error loading business:', error);
         this.router.navigate(['business', 'register']);
-      }
+      },
     });
   }
 
@@ -88,64 +82,92 @@ export class BusinessPageComponent implements OnInit {
         ownerId: this.business.ownerId,
         topic: this.business.topic,
         services: this.business.services,
-        // startHour: '',
-        // startMinute: '',
-        // endHour: '',
-        // endMinute: ''
       });
-    }
-  }
-
-  onAvatarChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.avatarPreview = reader.result;
-        this.salonForm.patchValue({ avatar: input.files![0] });
-        console.log('Avatar updated:', this.salonForm.get('avatar')?.value);
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-
-  onPhotosChange(event: Event, index: number): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.photoPreviews[index] = reader.result;
-        const currentPhotos = this.salonForm.get('photos')?.value || [];
-        currentPhotos[index] = input.files![0];
-        this.salonForm.patchValue({ photos: currentPhotos });
-        console.log('Photos updated:', this.salonForm.get('photos')?.value);
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-
-  onSubmit(): void {
-    if (this.salonForm.valid) {
-      console.log('Form Submitted!', this.salonForm.value);
-      this.businessService.putBusiness(this.salonForm.value).subscribe({
-        next: (response) => {
-          console.log(response)
-          window.location.reload()
-        },
-        error: (error) => {
-          console.log(error)
-        }
-      })
-    } else {
-      console.log('Form is invalid');
-      this.salonForm.markAllAsTouched();
-      console.log('Form errors:', this.salonForm.errors);
-      Object.keys(this.salonForm.controls).forEach(key => {
+      console.log('Form after patch:', {
+        value: this.salonForm.value,
+        valid: this.salonForm.valid,
+        errors: this.salonForm.errors,
+      });
+      Object.keys(this.salonForm.controls).forEach((key) => {
         const control = this.salonForm.get(key);
         console.log(`Control ${key}:`, {
           value: control?.value,
           valid: control?.valid,
-          errors: control?.errors
+          errors: control?.errors,
+        });
+      });
+    }
+  }
+
+  loadImages(): void {
+    if (this.business?.imageUrls) {
+      this.photoPreviews = [...this.business.imageUrls, ...Array(3 - this.business.imageUrls.length).fill(null)];
+      this.photoFiles = Array(this.photoPreviews.length).fill(null);
+    }
+  }
+
+  onPhotoChange(event: Event, index: number): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.photoPreviews[index] = reader.result as string;
+        this.photoFiles[index] = file;
+        this.salonForm.markAsDirty();
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  addPhotoSlot(): void {
+    this.photoPreviews.push(null);
+    this.photoFiles.push(null);
+  }
+
+  get avatarPreview(): string | null {
+    return this.photoPreviews[0]; // First photo is avatar
+  }
+
+  onSubmit(): void {
+    if (this.salonForm.valid) {
+      const formData = new FormData();
+      const businessData: Partial<Business> = {
+        ...this.salonForm.value,
+        imageUrls: this.business?.imageUrls || [], // Preserve existing URLs
+      };
+      formData.append('business', new Blob([JSON.stringify(businessData)], { type: 'application/json' }));
+
+      // Append photos as 'images'
+      this.photoFiles.forEach((file, index) => {
+        if (file) {
+          formData.append('images', file, file.name);
+        }
+      });
+
+      console.log('Submitting form data:', formData);
+      this.businessService.updateBusiness(formData).subscribe({
+        next: (response) => {
+          console.log('Business updated:', response);
+          this.business = response;
+          this.patchForm();
+          this.loadImages();
+          this.salonForm.markAsPristine();
+        },
+        error: (error:any) => {
+          console.error('Error updating business:', error);
+        },
+      });
+    } else {
+      console.log('Form is invalid');
+      this.salonForm.markAllAsTouched();
+      console.log('Form errors:', this.salonForm.errors);
+      Object.keys(this.salonForm.controls).forEach((key) => {
+        const control = this.salonForm.get(key);
+        console.log(`Control ${key}:`, {
+          value: control?.value,
+          valid: control?.valid,
+          errors: control?.errors,
         });
       });
     }

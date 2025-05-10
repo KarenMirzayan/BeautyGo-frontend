@@ -106,7 +106,7 @@ p {
   gap: 10px;
 }
 
-.card button {
+.btn {
   background-color: #f186ad;
   border-radius: 25px;
   border: none;
@@ -124,4 +124,8 @@ p {
 
 .montserrat-test {
   font-family: 'Montserrat', sans-serif;
+}
+
+.btn:hover {
+  background-color: #f16b9d;
 }

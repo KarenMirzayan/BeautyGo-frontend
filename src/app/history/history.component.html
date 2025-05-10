@@ -55,7 +55,7 @@
         </div>
         <div class="btns">
           <button class="btn inter-common" (click)="navigateToReview(reservation.id)" *ngIf="activeTab === 'history'">Оценить запись</button>
-          <button class="btn inter-common" (click)="bookAgain()">Записаться</button>
+          <button class="btn inter-common" (click)="bookAgain('salon/{{reservation.businessId}}')">Записаться</button>
         </div>
       </div>
     </div>

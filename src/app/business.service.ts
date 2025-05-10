@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Business} from "./models";
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BusinessService {
 
-  private apiUrl = 'http://localhost:8080/business';
+  private apiUrl = `${environment.apiUrl}/business`;
 
   constructor(private http: HttpClient) {}
 
@@ -24,7 +25,7 @@ export class BusinessService {
     return this.http.post<any>(`${this.apiUrl}`, business);
   }
 
-  putBusiness(business: any){
+  updateBusiness(business: any){
     return this.http.put<any>(`${this.apiUrl}`, business);
   }
 

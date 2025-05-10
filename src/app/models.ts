@@ -9,6 +9,7 @@ export interface Business {
   ownerId: number;
   services: Service[];
   rating: number;
+  imageUrls?: string[];
 }
 
 export interface Service {
@@ -75,12 +76,17 @@ export interface BusinessApplicationDto {
 }
 
 export interface ReviewDto {
+  id: number;
+  verified: boolean;
   businessId: number;
   reservationId: number;
   customerName: string;
   customerEmail: string;
   rating: number;
   comment?: string;
+  createdAt: string;
+  businessName?: string;
+  staffName?: string;
 }
 
 
