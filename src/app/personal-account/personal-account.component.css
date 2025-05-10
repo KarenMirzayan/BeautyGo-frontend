@@ -20,8 +20,8 @@ h2{
     padding:0px;
 }
 .photo {
-    position: relative; 
-    display: inline-block; 
+    position: relative;
+    display: inline-block;
 }
 
 .profile-img{
@@ -37,11 +37,11 @@ h2{
 
 .add-img{
     width:41px;
-    position: absolute; 
-    top: 65%; 
-    right: 10px; 
-    background: none; 
-    border: none; 
+    position: absolute;
+    top: 65%;
+    right: 10px;
+    background: none;
+    border: none;
     cursor: pointer;
 }
 
@@ -54,12 +54,6 @@ h2{
     margin-bottom: 65px;
 }
 
-.profile-btns{
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
 .btn{
     background-color: #F186AD;
     border-radius: 25px;
@@ -69,10 +63,11 @@ h2{
     cursor: pointer;
     font-size: 16px;
     font-weight: 300;
+    width: 231px;
 }
 
-.btn{
-    width: 231px;
+.btn:disabled{
+  background-color: #eeeeee;
 }
 
 .input-group{
@@ -120,4 +115,37 @@ h2{
     background-color: #929292;
     height: 688px;
     width:1px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 5px;
 }

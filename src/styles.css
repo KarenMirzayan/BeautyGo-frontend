@@ -1,6 +1,14 @@
 body, html {
   margin: 0;
   padding: 0;
+  height: 100%;
+}
+
+router-outlet + * {
+  display: block;
+  height: auto;
+  overflow: visible;
+  min-height: 100vh;
 }
 
 * {
@@ -45,6 +53,12 @@ a {
   background-color: #f16b9d;
   cursor: pointer;
 }
+
+.btn-main:disabled {
+  background-color: #bbb;
+  cursor: not-allowed;
+}
+
 .montserrat-test {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
@@ -74,5 +88,8 @@ a {
 .thin-font {
   font-weight: 300;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

@@ -1,100 +1,63 @@
+<!-- src/app/history/history.component.html -->
 <h2 class="general-title montserrat-test">Мои записи</h2>
 <div class="container">
-    <div class="history-tabs">
-        <span>Текущие</span>
-        <span>История</span>
-    </div>
-    <div class="line"></div>
+  <div class="history-tabs">
+    <span
+      [class.active]="activeTab === 'current'"
+      (click)="switchTab('current')"
+      class="inter-common"
+    >Текущие</span>
+    <span
+      [class.active]="activeTab === 'history'"
+      (click)="switchTab('history')"
+      class="inter-common"
+    >История</span>
+  </div>
+  <div class="line"></div>
 
-    <div class="month"> 
-        <p class="month-name inter-common">Октябрь 2024</p>
-        
-        <div class="cards-container">
-            <div class="card">
-                <p class="date inter-common">10.10.2024 в 13.00</p>
-                <div class="description">
-        
-                    <div class="salon">
-                        <div сlass="specification">
-                            <p class="category">Салон красоты</p>
-                            <p class="name">Oblako</p>
-                        </div>
-                        <div сlass="specification">
-                            <p class="category">Услуга</p>
-                            <p class="name">Маникюр Педикюр</p>
-                        </div>
-                    </div>
-        
-                    <div class="master">
-                        <p class="category">Мастер</p>
-                        <img class="master-img" src="" alt="Аватар">
-                    </div>
-                </div>
-                <div class="btns">
-                    <button class="btn inter-common">Оценить запись</button>
-                    <button class="btn inter-common">Записаться</button>
-                </div>
+  <div *ngIf="activeTab === 'current' && Object.keys(groupedCurrent).length === 0">
+    <p class="inter-common">Нет текущих записей</p>
+  </div>
+  <div *ngIf="activeTab === 'history' && Object.keys(groupedHistory).length === 0">
+    <p class="inter-common">Нет прошлых записей</p>
+  </div>
+
+  <div
+    class="month"
+    *ngFor="let monthYear of Object.keys(activeTab === 'current' ? groupedCurrent : groupedHistory)"
+  >
+    <p class="month-name inter-common">{{ monthYear }}</p>
+    <div class="cards-container">
+      <div
+        class="card"
+        *ngFor="let reservation of (activeTab === 'current' ? groupedCurrent : groupedHistory)[monthYear]"
+      >
+        <p class="date inter-common">{{ formatDateTime(reservation.startTime) }}</p>
+        <div class="description">
+          <div class="salon">
+            <div class="specification">
+              <p class="category">Салон красоты</p>
+              <p class="name">{{ reservation.salonName }}</p>
             </div>
-
-            <div class="card">
-                <p class="date inter-common">10.10.2024 в 13.00</p>
-                <div class="description">
-        
-                    <div class="salon">
-                        <div сlass="specification">
-                            <p class="category">Салон красоты</p>
-                            <p class="name">Oblako</p>
-                        </div>
-                        <div сlass="specification">
-                            <p class="category">Услуга</p>
-                            <p class="name">Маникюр Педикюр</p>
-                        </div>
-                    </div>
-        
-                    <div class="master">
-                        <p class="category">Мастер</p>
-                        <img class="master-img" src="" alt="Аватар">
-                    </div>
-                </div>
-                <div class="btns">
-                    <button class="btn inter-common">Оценить запись</button>
-                    <button class="btn inter-common">Записаться</button>
-                </div>
+            <div class="specification">
+              <p class="category">Услуга</p>
+              <p class="name">{{ reservation.serviceName }}</p>
             </div>
-
-
-            <div class="card">
-                <p class="date inter-common">10.10.2024 в 13.00</p>
-                <div class="description">
-        
-                    <div class="salon">
-                        <div сlass="specification">
-                            <p class="category">Салон красоты</p>
-                            <p class="name">Oblako</p>
-                        </div>
-                        <div сlass="specification">
-                            <p class="category">Услуга</p>
-                            <p class="name">Маникюр Педикюр</p>
-                        </div>
-                    </div>
-        
-                    <div class="master">
-                        <p class="category">Мастер</p>
-                        <img class="master-img" src="" alt="Аватар">
-                    </div>
-                </div>
-                <div class="btns">
-                    <button class="btn inter-common">Оценить запись</button>
-                    <button class="btn inter-common">Записаться</button>
-                </div>
-            </div>
+          </div>
+          <div class="master">
+            <p class="category">Мастер</p>
+            <img
+              class="master-img"
+              [src]="reservation.masterAvatarUrl"
+              alt="Аватар"
+            >
+          </div>
         </div>
-        
+        <div class="btns">
+          <button class="btn inter-common" (click)="navigateToReview(reservation.id)" *ngIf="activeTab === 'history'">Оценить запись</button>
+          <button class="btn inter-common" (click)="bookAgain()">Записаться</button>
+        </div>
+      </div>
     </div>
-
-    
+  </div>
 </div>
-
-
-
-

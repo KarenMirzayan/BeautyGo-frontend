@@ -31,4 +31,8 @@ export class BusinessService {
   getBusinessByOwner(id: number): Observable<Business> {
     return this.http.get<Business>(`${this.apiUrl}/owner/${id}`);
   }
+
+  searchBusiness(query: string): Observable<Business[]> {
+    return this.http.get<Business[]>(`${this.apiUrl}/search/${query}`);
+  }
 }

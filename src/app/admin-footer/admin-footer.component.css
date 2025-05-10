@@ -1,0 +1,22 @@
+footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 40px;
+  padding-right: 244px;
+  height: 168px;
+  justify-content: space-between;
+  border-top: 1px solid #666666;
+  margin-top: 40px;
+}
+
+a, p {
+  color: #666666;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 91px 249px;
+  grid-column-gap: 148px;
+  grid-row-gap: 32px;
+}

@@ -1,4 +1,4 @@
-<header>
+<header [class.hidden]="isHidden">
   <div class="header-top">
     <div class="row">
       <a href="#"> <img src="logo.svg" alt="BeautyGo"> </a>
@@ -6,13 +6,23 @@
         <a [routerLink]="['business']" class="a-top">Стать партнёром</a>
         <a href="#" class="a-top">Контакты</a>
         <a class="a-top" (click)="toggleDropdown()">
-          <img src="profile.svg" alt="pfp">
+          <img src="profile.svg" alt="Profile" class="profile-icon">
         </a>
+      </div>
+      <div class="mobile-actions" *ngIf="isWideScreen">
+        <a class="a-top" (click)="toggleDropdown()">
+          <img src="profile.svg" alt="Profile" class="profile-icon">
+        </a>
+        <div class="hamburger" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
     </div>
   </div>
   <div class="header-bot">
-    <nav class="row nav-header">
+    <nav class="row nav-header" [class.active]="isMobileMenuOpen">
       <a href="#">Макияж</a>
       <a href="#">Ногтевой сервис</a>
       <a href="#">Парикмахерские услуги</a>

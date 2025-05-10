@@ -81,19 +81,19 @@
             Укажите корректный email
           </div>
         </div>
-        <div class="form">
-          <p class="inter-common">Телефон:</p>
-          <input
-            type="tel"
-            formControlName="phone"
-            placeholder="+7(999) 123 45 67"
-            mask="(000) 000 00 00"
-            prefix="+7"
-            [instantPrefix]="true"
-          />
-          <div *ngIf="appointmentForm.get('phone')?.invalid && appointmentForm.get('phone')?.touched" class="error">
-            Укажите корректный телефон
-          </div>
+      </div>
+      <div class="form">
+        <p class="inter-common">Телефон:</p>
+        <input
+          type="tel"
+          formControlName="phone"
+          placeholder="+7 777 777 77 77"
+          mask="+0 000 000 00 00"
+          [instantPrefix]="true"
+          [dropSpecialCharacters]="false"
+        />
+        <div *ngIf="appointmentForm.get('phone')?.invalid && appointmentForm.get('phone')?.touched" class="error">
+          Укажите корректный телефон
         </div>
       </div>
       <div class="form">

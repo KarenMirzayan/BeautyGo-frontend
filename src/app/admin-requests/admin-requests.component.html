@@ -1,0 +1,33 @@
+<!-- src/app/admin-requests/admin-requests.component.html -->
+<h2 class="general-title montserrat-test">Заявки</h2>
+
+<div class="container requests-page-top">
+  <p class="inter-common">{{ pendingCount }} необработанных заявок</p>
+  <app-dropdown
+    [items]="orderby"
+    [defaultText]="'По дате подачи'"
+    [defaultIsSelectable]="true"
+    (selectedValue)="onOrderByChange($event)">
+  </app-dropdown>
+</div>
+
+<div class="container">
+  <div class="requests">
+    <a
+      *ngFor="let app of applications"
+      [routerLink]="[app.id]"
+      class="request" [class.done]="app.verified">
+      <div class="request-left">
+        <p class="inter-common request-number">Заявка №{{ app.id }}</p>
+        <p class="inter-common request-name">{{ app.businessName }}</p>
+      </div>
+      <div class="request-right">
+        <img src="clock.svg" alt="Неодобрено" *ngIf="!app.verified">
+        <img src="check.svg" alt="Одобрено" *ngIf="app.verified">
+        <p class="inter-common date">{{app.createdAt}}</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+

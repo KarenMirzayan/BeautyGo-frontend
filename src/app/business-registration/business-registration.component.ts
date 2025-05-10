@@ -49,6 +49,8 @@ export class BusinessRegistrationComponent {
       this.user = {
         id: 0,
         fullname: '',
+        name: '',
+        surname: '',
         phoneNumber: '',
         email: null,
         role: 'USER'
@@ -56,17 +58,18 @@ export class BusinessRegistrationComponent {
     }
 
     this.businessForm = this.fb.group({
-      firstName: [this.user.id !== 0 ? this.user.fullname : '', Validators.required],
-      lastName: ['', Validators.required],
+      ownerName: [this.user.id !== 0 ? this.user.name : '', Validators.required],
+      ownerSurname: [this.user.id !== 0 ? this.user.surname : '', Validators.required],
       phone: [this.user.id !== 0 ? this.user.phoneNumber : '', Validators.required],
       city: ['', Validators.required],
+      country: ['', Validators.required],
       address: ['', Validators.required],
-      name: ['', Validators.required],
+      businessName: ['', Validators.required],
       masterCount: ['', Validators.required],
       websites: [''],
       description: [''],
       ownerId: [this.user.id !== 0 ? this.user.id : 0],
-      topic: ['', Validators.required]
+      businessType: ['', Validators.required]
     });
 
     if (this.businessForm.value.ownerId === 0) {
@@ -75,8 +78,8 @@ export class BusinessRegistrationComponent {
   }
 
   onSelectionChange(category: string) {
-    this.businessForm.patchValue({ topic: category });
-    console.log('Topic set to:', this.businessForm.get('topic')?.value); // Debug
+    this.businessForm.patchValue({ businessType: category });
+    console.log('businessType set to:', this.businessForm.get('businessType')?.value); // Debug
   }
 
   submitForm() {
@@ -89,8 +92,9 @@ export class BusinessRegistrationComponent {
         next: (response) => {
           console.log('Success:', response);
           this.successMessage = 'Регистрация удалась!';
+          alert("Ваша заявка принята!")
           setTimeout(() => {
-            this.router.navigate(['business', 'page']);
+            this.router.navigate(['']);
           }, 2000);
         },
         error: (error) => {

@@ -1,0 +1,58 @@
+.requests-page-top {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.requests {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  margin: 0 40px;
+}
+
+.request {
+  background-color: white;
+  width: 100%;
+  max-width: 1024px;
+  border: 2px solid #F186AD;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 12px 0;
+}
+
+.request-number {
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.request-name {
+  color: #666666;
+  margin-top: 12px;
+  margin-left: 24px;
+}
+
+.request-left {
+  margin-left: 30px;
+}
+
+.request-right {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 30px;
+}
+
+.date {
+  color: #666666;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.done {
+  border: 1px solid #666666;
+}

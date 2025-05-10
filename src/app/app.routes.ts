@@ -18,6 +18,14 @@ import { SalonAppointmentComponent } from './salon-appointment/salon-appointment
 import {BusinessPageComponent} from "./business-page/business-page.component";
 import { HistoryComponent } from './history/history.component';
 import { ReviewComponent } from './review/review.component';
+import {EmployeePageComponent} from "./employee-page/employee-page.component";
+import {EmployeeMainComponent} from "./employee-main/employee-main.component";
+import {EmployeeJournalComponent} from "./employee-journal/employee-journal.component";
+import {AdminPageComponent} from "./admin-page/admin-page.component";
+import {AdminMainComponent} from "./admin-main/admin-main.component";
+import {AdminRequestsComponent} from "./admin-requests/admin-requests.component";
+import {AdminRequestDetailComponent} from "./admin-request-detail/admin-request-detail.component";
+import {AdminReviewsComponent} from "./admin-reviews/admin-reviews.component";
 
 export const routes: Routes = [
   {path: "", component: HeaderFooterPageComponent, children: [
@@ -27,7 +35,7 @@ export const routes: Routes = [
       {path: "review", component: ReviewComponent},
       {path: "contacts", component: ContactsPageComponent},
       {path: "category", component: CategoryComponent},
-      {path: "search", component: SearchComponent},
+      {path: "search/:query", component: SearchComponent},
       {path:"authentication", component: AuthComponent},
       {path: "salon/:id", component: SalonComponent},
       {path: "salon/:id/services", component: SalonServicesComponent},
@@ -43,4 +51,18 @@ export const routes: Routes = [
       {path: "authentication", component: AuthComponent},
       {path: "page", component: BusinessPageComponent},
     ]},
+  {path: "employee", component: EmployeePageComponent, children: [
+      {path: "", component: EmployeeMainComponent},
+      {path: "journal", component: EmployeeJournalComponent},
+      {path: "authentication", component: AuthComponent},
+      {path: "account", component: PersonalAccountComponent},
+    ]},
+  {path: "admin", component: AdminPageComponent, children: [
+      {path: "", component: AdminMainComponent},
+      {path: "authentication", component: AuthComponent},
+      {path: "account", component: PersonalAccountComponent},
+      {path: "requests", component: AdminRequestsComponent},
+      {path: "requests/:id", component: AdminRequestDetailComponent},
+      {path: "reviews", component: AdminReviewsComponent},
+    ]}
 ];

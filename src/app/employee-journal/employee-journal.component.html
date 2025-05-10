@@ -1,0 +1,42 @@
+<!-- src/app/employee-journal/employee-journal.component.html -->
+<h2 class="general-title montserrat-test">Журнал</h2>
+<div class="container">
+  <div class="journal">
+    <div class="date-slider">
+      <button class="date-btn" *ngIf="canGoBack()" (click)="changeDate('prev')">
+        <img src="arrow_left.svg" alt="arrow left">
+      </button>
+      <p class="date-text inter-common">{{ formatDate() }}</p>
+      <button class="date-btn" (click)="changeDate('next')">
+        <img src="arrow_right.svg" alt="arrow right">
+      </button>
+    </div>
+    <div class="schedule">
+      <div class="employee">
+        <div class="img-div"><img src="pfp_placeholder.png" alt="employee profile picture"></div>
+        <p class="inter-common">Аселя Калиева</p>
+      </div>
+      <div class="schedule-main">
+        <!-- Time slot grid -->
+        <div class="time-grid">
+          <div class="time-slot" *ngFor="let slot of timeSlots; let i = index" [ngClass]="{'halfhour': slot.isHalfHour}">
+            <p [ngClass]="{'grey': slot.isHalfHour}">{{ slot.time }}</p>
+            <a class="hover" *ngIf="slot.isAvailable" (click)="openPopup(slot.time)">
+              <p>+</p>
+            </a>
+          </div>
+        </div>
+        <!-- Reservation overlays -->
+        <div class="reservation-overlay" *ngFor="let display of reservationDisplays" [ngStyle]="{'top': display.top + 'px', 'height': display.height + 'px'}">
+          <p class="reservation-text">{{ display.reservation.customerName }}</p>
+          <p class="reservation-text">{{ formatTime(display.reservation.startTime) }}–{{ formatTime(display.reservation.endTime) }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-employee-journal-popup
+  [isVisible]="showPopup"
+  (closePopup)="closePopup($event)"
+></app-employee-journal-popup>

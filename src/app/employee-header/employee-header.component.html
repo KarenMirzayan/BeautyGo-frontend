@@ -1,0 +1,14 @@
+<header>
+  <a routerLink="/business"><img src="logo_business.svg" alt="beauty go business"></a>
+  <div class="header-right">
+    <a routerLink="./journal">Журнал</a>
+    <a class="a-top" (click)="toggleDropdown()">
+      <img src="profile.svg" alt="pfp">
+    </a>
+  </div>
+
+  <div *ngIf="isDropdownOpen" class="dropdown-menu">
+    <a routerLink="account" class="inter-common">Личный кабинет</a>
+    <a routerLink="./authentication" class="inter-common">Войти</a>
+  </div>
+</header>

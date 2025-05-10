@@ -1,123 +1,115 @@
-<!--<app-header></app-header>-->
+<!-- src/app/personal-account/personal-account.component.html -->
 <div class="body">
   <div class="profile">
     <h2 class="general-title montserrat-test">Личный кабинет</h2>
     <div class="photo">
-      <img class="profile-img" src="profile.jpg" alt="Аватар">
-      <button class="add-btn"><img class="add-img" src="add.svg" alt="Аватар"></button>
+      <img class="profile-img" [src]="'pfp_placeholder.png'" alt="Аватар">
+      <input type="file" id="photo-upload" accept="image/*" (change)="uploadPhoto($event)" style="display: none;">
+      <button class="add-btn" (click)="document.getElementById('photo-upload')?.click()">
+        <img class="add-img" src="add.svg" alt="Добавить фото">
+      </button>
     </div>
-    <p class="name inter-common">Алиса</p>
-    <p class="number thin-font grey-small">+7 777 777 77 77</p>
-    <div class="profile-btns">
-      <button class="btn inter-common">Редактировать профиль</button>
-      <button class="btn inter-common">Сменить пароль</button>
-    </div>
+    <p class="name inter-common">{{ user?.name || 'Имя' }}</p>
+    <p class="number thin-font grey-small">{{ user?.phoneNumber || '+7 777 777 77 77' }}</p>
+    <button class="btn inter-common" (click)="togglePasswordModal()">Сменить пароль</button>
   </div>
-  
+
   <div class="line"></div>
-  
+
   <div class="edit-form">
     <h2 class="general-title montserrat-test">Редактировать данные</h2>
-  
-    <div class="personal-data"> 
-      <input type="text" value="Анита">
-      <input type="text" value="Фамилия">
-      <input type="text" value="+7 777 777 77 77">
-      <input type="text" value="e-mail">
-      <input type="text" value="01/01/1991">
-    </div>
-  
-    <div class="gender-question">
-      <p>Пол</p>
-      <div class="options">
-        <label>
-          <input type="radio" name="gender" value="male" checked>
-          Мужской
-        </label>
-        <label>
-          <input type="radio" name="gender" value="female">
-          Женский
-        </label>
+    <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
+      <div class="personal-data">
+        <div class="input-group">
+          <input type="text" formControlName="name" placeholder="Имя">
+          <div class="error-message" *ngIf="editForm.get('name')?.invalid && editForm.get('name')?.touched">
+            <span *ngIf="editForm.get('name')?.errors?.['required']">Имя обязательно</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <input type="text" formControlName="surname" placeholder="Фамилия">
+          <div class="error-message" *ngIf="editForm.get('surname')?.invalid && editForm.get('surname')?.touched">
+            <span *ngIf="editForm.get('surname')?.errors?.['required']">Фамилия обязательна</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <input
+            type="text"
+            formControlName="phoneNumber"
+            placeholder="+7 777 777 77 77"
+            mask="+0 000 000 00 00"
+            [showMaskTyped]="true"
+            [dropSpecialCharacters]="false"
+          >
+          <div class="error-message" *ngIf="editForm.get('phoneNumber')?.invalid && editForm.get('phoneNumber')?.touched">
+            <span *ngIf="editForm.get('phoneNumber')?.errors?.['required']">Телефон обязателен</span>
+            <span *ngIf="editForm.get('phoneNumber')?.errors?.['pattern']">Введите корректный номер телефона (например, +7 777 777 77 77)</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <input type="email" formControlName="email" placeholder="e-mail">
+          <div class="error-message" *ngIf="editForm.get('email')?.invalid && editForm.get('email')?.touched">
+            <span *ngIf="editForm.get('email')?.errors?.['email']">Введите корректный e-mail</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <input
+            type="text"
+            formControlName="birthdate"
+            placeholder="01/01/1991"
+            mask="00/00/0000"
+            [showMaskTyped]="true"
+            [dropSpecialCharacters]="false"
+            [specialCharacters]="['/']"
+          >
+          <div class="error-message" *ngIf="editForm.get('birthdate')?.invalid && editForm.get('birthdate')?.touched">
+            <span *ngIf="editForm.get('birthdate')?.errors?.['pattern']">Введите дату в формате ДД/ММ/ГГГГ</span>
+            <span *ngIf="editForm.get('birthdate')?.errors?.['invalidDate']">Введите действительную дату</span>
+          </div>
+        </div>
       </div>
+
+      <div class="gender-question">
+        <p>Пол</p>
+        <div class="options">
+          <label>
+            <input type="radio" formControlName="gender" value="male">
+            Мужской
+          </label>
+          <label>
+            <input type="radio" formControlName="gender" value="female">
+            Женский
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn inter-common" [disabled]="editForm.invalid">Сохранить</button>
+    </form>
+  </div>
+
+  <!-- Password Change Modal -->
+  <div class="modal" *ngIf="showPasswordModal">
+    <div class="modal-content">
+      <h3>Сменить пароль</h3>
+      <form [formGroup]="passwordChangeForm" (ngSubmit)="changePassword()">
+        <input type="password" formControlName="oldPassword" placeholder="Старый пароль">
+        <div class="error-message" *ngIf="passwordChangeForm.get('oldPassword')?.invalid && passwordChangeForm.get('oldPassword')?.touched">
+          <span *ngIf="passwordChangeForm.get('oldPassword')?.errors?.['required']">Старый пароль обязателен</span>
+        </div>
+
+        <input type="password" formControlName="newPassword" placeholder="Новый пароль">
+        <div class="error-message" *ngIf="passwordChangeForm.get('newPassword')?.invalid && passwordChangeForm.get('newPassword')?.touched">
+          <span *ngIf="passwordChangeForm.get('newPassword')?.errors?.['required']">Новый пароль обязателен</span>
+          <span *ngIf="passwordChangeForm.get('newPassword')?.errors?.['minlength']">Пароль должен содержать минимум 6 символов</span>
+        </div>
+
+        <button type="submit" class="btn inter-common" [disabled]="passwordChangeForm.invalid">Сменить</button>
+        <button type="button" class="btn inter-common" (click)="togglePasswordModal()">Отмена</button>
+      </form>
     </div>
-  
-    <button class="btn inter-common">Сохранить</button>
-    
   </div>
 </div>
-
-
-
-<!-- <div class="body">
-  <div class="profile">
-    <h2>Личный кабинет</h2>
-    <img src="profile.jpg" alt="Аватар">
-    <p>Алиса</p>
-    <p>+7 777 777 77 77</p>
-    <div class="profile-buttons">
-      <button class="btn">Редактировать профиль</button>
-      <button class="btn">Сменить пароль</button>
-    </div>
-
-  </div>
-  <div class="edit-form">
-    <h2>Редактировать данные</h2>
-    <div class="form-group">
-      <input type="text" value="Анита">
-    </div>
-    <div class="form-group">
-      <input type="text" value="">
-    </div>
-    <div class="form-group">
-      <input type="text" value="+7 777 7777 77 77">
-    </div>
-    <div class="form-group">
-      <input type="email" value="">
-    </div>
-    <div class="form-group">
-      <input type="date" value="2000-01-01">
-    </div>
-    <div class="form-group">
-      <input type="radio" name="gender" checked> Женский
-      <input type="radio" name="gender"> Мужской
-    </div>
-    <button class="btn">Сохранить</button>
-  </div>
-</div> -->
-<!--<app-footer></app-footer>-->
-<!-- <div class="profile">
-    <img src="profile.jpg" alt="Аватар">
-    <h2>Алиса</h2>
-    <p>+7 777 777 77 77</p>
-    <button class="btn">Редактировать профиль</button>
-    <button class="btn">Сменить пароль</button>
-</div>
-<div class="edit-form">
-    <h3>Редактировать данные</h3>
-    <div class="form-group">
-        <label>Имя</label>
-        <input type="text" value="Анита">
-    </div>
-    <div class="form-group">
-        <label>Фамилия</label>
-        <input type="text" value="">
-    </div>
-    <div class="form-group">
-        <label>Телефон</label>
-        <input type="text" value="+7 777 7777 77 77">
-    </div>
-    <div class="form-group">
-        <label>E-mail</label>
-        <input type="email" value="">
-    </div>
-    <div class="form-group">
-        <label>Дата рождения</label>
-        <input type="date" value="2000-01-01">
-    </div>
-    <div class="form-group">
-        <label>Пол</label>
-        <input type="radio" name="gender" checked> Женский
-        <input type="radio" name="gender"> Мужской
-    </div>
-    <button class="btn">Сохранить</button>
-</div> -->

@@ -1,10 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {HeaderComponent} from "../header/header.component";
-import {FooterComponent} from "../footer/footer.component";
-import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-import {Business} from "../models";
-import {BusinessService} from "../business.service";
-import {NgForOf} from "@angular/common";
+// src/app/main/main.component.ts
+import { Component, OnInit } from '@angular/core';
+import { HeaderComponent } from "../header/header.component";
+import { FooterComponent } from "../footer/footer.component";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import { Business } from "../models";
+import { BusinessService } from "../business.service";
+import { CommonModule } from "@angular/common";
+import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-main',
@@ -13,16 +15,22 @@ import {NgForOf} from "@angular/common";
     HeaderComponent,
     FooterComponent,
     RouterLink,
-    NgForOf
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
 export class MainComponent implements OnInit {
-  businesses: Business[] = []
+  businesses: Business[] = [];
+  searchQuery = new FormControl('');
 
-  constructor(private businessService: BusinessService, private route: ActivatedRoute, private router: Router) {
-  }
+  constructor(
+    private businessService: BusinessService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.businessService.getAllBusinesses().subscribe((data) => {
@@ -31,7 +39,15 @@ export class MainComponent implements OnInit {
     });
   }
 
+  search() {
+    const query = this.searchQuery.value?.trim();
+    if (query) {
+      this.router.navigate([`/search/${encodeURIComponent(query)}`]);
+      this.searchQuery.setValue('');
+    }
+  }
+
   business() {
-    this.router.navigate(['business/'])
+    this.router.navigate(['business/']);
   }
 }

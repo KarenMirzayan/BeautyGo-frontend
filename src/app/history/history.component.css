@@ -1,125 +1,127 @@
-.container{
-    margin: 39px 40px;
+.container {
+  margin: 39px 40px;
 }
 
-.history-tabs{
-    display: flex;
-    flex-direction: row;
-    gap:54px;
-    font-size: 20px;
-    margin-left:72px;
+.history-tabs {
+  display: flex;
+  flex-direction: row;
+  gap: 54px;
+  font-size: 20px;
+  margin-left: 72px;
 }
 
 .history-tabs span {
-    cursor: pointer;
-    color: black;
-    border-bottom: 2px solid #ffffff;
-    font-weight: 300;
-    
+  cursor: pointer;
+  color: black;
+  border-bottom: 2px solid #ffffff;
+  padding-bottom: 16px;
 }
-  
+
 .history-tabs .active {
-    font-weight: 500;
-    border-bottom: 2px solid black;
+  font-weight: 500;
+  border-bottom: 2px solid black;
 }
 
-.line{
-    background-color: #929292;
-    width:100%;
-    height: 1px;
+.line {
+  background-color: #929292;
+  width: 100%;
+  height: 1px;
 }
 
-p{
-    font-size: 16px;
-    font-weight: 400px;
-    color:#666666;
+p {
+  font-size: 16px;
+  font-weight: 400;
+  color: #666666;
 }
 
-.month{
-    margin-top: 59px;
-
-    .month-name{
-        margin-bottom: 35px;
-    }
+.month {
+  margin-top: 59px;
 }
 
-.cards-container{
-    display: grid;
-    grid-template-columns: repeat(2, auto); 
-    gap: 45px 65px; 
-    justify-content: end; 
-    margin-right: 0; 
-    width: fit-content;
+.month-name {
+  margin-bottom: 35px;
 }
 
-.card{
-    border: 1px solid #929292;
-    border-radius: 15px;
-    width:387px;
-    height:300px;
-    padding-left: 37px;
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 45px 65px;
+  justify-content: end;
+  margin-right: 0;
+  width: fit-content;
+}
 
+.card {
+  border: 1px solid #929292;
+  border-radius: 15px;
+  width: 387px;
+  height: 300px;
+  padding-left: 37px;
+}
 
-    .date{
-        font-size: 20px;
-        font-weight: 500;
-        color: #C0C0C0;
-        margin-top:29px;
-    }
+.card .date {
+  font-size: 20px;
+  font-weight: 500;
+  color: #c0c0c0;
+  margin-top: 29px;
+}
 
-    .salon{
-        display: flex;
-        flex-direction: column;
-        gap: 23px;
-    }
+.card .salon {
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+}
 
-    .description{
-        display: flex;
-        flex-direction: row;
-        gap: 119px;
-        margin-top: 28px;
-        margin-bottom: 39px;
-    }
+.card .description {
+  display: flex;
+  flex-direction: row;
+  gap: 119px;
+  margin-top: 28px;
+  margin-bottom: 39px;
+}
 
-    .specification{
-        display: flex;
-        flex-direction: column;
-        gap: 7px;
-    }
+.card .specification {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
 
-    .category{
-        color: #929292;
-    }
+.card .category {
+  color: #929292;
+}
 
-    .name{
-        color: black;
-    }
+.card .name {
+  color: black;
+}
 
+.card .master-img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+}
 
-    .master-img{
-        width:55px;
-        height: 55px;
-        border-radius: 50%;
-    }
+.card .btns {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
 
-    .btns{
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-    }
+.card button {
+  background-color: #f186ad;
+  border-radius: 25px;
+  border: none;
+  color: white;
+  height: 45px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 300;
+  width: 170px;
+}
 
-    button{
-        background-color: #F186AD;
-        border-radius: 25px;
-        border:none;
-        color:white;
-        height:45px;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: 300;
-    }
-    
-    button{
-        width: 170px;
-    }
+.inter-common {
+  font-family: 'Inter', sans-serif;
+}
+
+.montserrat-test {
+  font-family: 'Montserrat', sans-serif;
 }

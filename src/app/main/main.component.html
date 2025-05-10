@@ -1,16 +1,15 @@
-<!--<app-header></app-header>-->
-
+<!-- src/app/main/main.component.html -->
 <div class="banner">
   <img src="img_1.png" alt="Banner image">
-  <h1 class="montserrat-test banner-text">Онлайн-запись на услуги в сфере красоты </h1>
+  <h1 class="montserrat-test banner-text">Онлайн-запись на услуги в сфере красоты</h1>
   <div class="search-box">
-    <input type="text" class="search" placeholder="Поиск услуг">
-    <button class="search-btn">Искать</button>
+    <input type="text" class="search" placeholder="Поиск услуг" [formControl]="searchQuery" (keyup.enter)="search()">
+    <button class="search-btn" (click)="search()">Искать</button>
   </div>
 </div>
+
 <div class="container">
   <h2 class="general-title montserrat-test">Категории</h2>
-
   <div class="category-cards">
     <div class="card">
       <p class="category-title">Парикмахерские услуги</p>
@@ -18,87 +17,45 @@
     </div>
     <div class="card">
       <p class="category-title">Ногтевой сервис</p>
-      <img src="hand.svg" alt="Scissors" class="card-img">
+      <img src="hand.svg" alt="Nails" class="card-img">
     </div>
     <div class="card">
       <p class="category-title">Макияж</p>
-      <img src="brush.svg" alt="Scissors" class="card-img">
+      <img src="brush.svg" alt="Makeup" class="card-img">
     </div>
     <div class="card">
       <p class="category-title">Ресницы</p>
-      <img src="eye.svg" alt="Scissors" class="card-img">
+      <img src="eye.svg" alt="Eyelashes" class="card-img">
     </div>
     <div class="card">
       <p class="category-title">Удаление волос</p>
-      <img src="hair.svg" alt="Scissors" class="card-img">
+      <img src="hair.svg" alt="Hair removal" class="card-img">
     </div>
     <div class="card">
       <p class="category-title">Брови</p>
-      <img src="eyebrow.svg" alt="Scissors" class="card-img">
+      <img src="eyebrow.svg" alt="Eyebrows" class="card-img">
     </div>
   </div>
 </div>
 
 <div class="container">
-
-</div>
-<h2 class="general-title montserrat-test">Маникюр</h2>
-
-<div class="product-cards">
-  <div class="product-card" *ngFor="let business of businesses">
-    <a routerLink="./salon/{{business.id}}">
-      <img src="img.png" alt="Place">
-      <div class="btm-text">
-        <p class="place-name">{{business.name}}</p>
-        <p class="grey-small">{{business.address}}</p>
-        <p class="rating">9.5 ★</p>
-      </div>
-    </a>
+  <h2 class="general-title montserrat-test">Маникюр</h2>
+  <div class="product-cards">
+    <div class="product-card" *ngFor="let business of businesses">
+      <a routerLink="./salon/{{business.id}}">
+        <img src="img.png" alt="Place">
+        <div class="btm-text">
+          <p class="place-name">{{business.name}}</p>
+          <p class="grey-small">{{business.address}}</p>
+          <p class="rating">9.5 ★</p>
+        </div>
+      </a>
+    </div>
   </div>
 </div>
 
 <div class="container">
-
-</div>
-<h2 class="general-title montserrat-test">Ногтевой сервис</h2>
-
-<div class="product-cards">
-  <div class="product-card">
-    <img src="img.png" alt="Place">
-    <div class="btm-text">
-      <p class="place-name">Название салона</p>
-      <p class="grey-small">Адрес салона</p>
-      <p class="rating">9.5 ★</p>
-    </div>
-  </div>
-  <div class="product-card">
-    <img src="img.png" alt="Place">
-    <div class="btm-text">
-      <p class="place-name">Название салона</p>
-      <p class="grey-small">Адрес салона</p>
-      <p class="rating">9.5 ★</p>
-    </div>
-  </div>
-  <div class="product-card">
-    <img src="img.png" alt="Place">
-    <div class="btm-text">
-      <p class="place-name">Название салона</p>
-      <p class="grey-small">Адрес салона</p>
-      <p class="rating">9.5 ★</p>
-    </div>
-  </div>
-  <div class="product-card">
-    <img src="img.png" alt="Place">
-    <div class="btm-text">
-      <p class="place-name">Название салона</p>
-      <p class="grey-small">Адрес салона</p>
-      <p class="rating">9.5 ★</p>
-    </div>
-  </div>
-</div>
-<div class="container">
-  <h2 class="general-title montserrat-test">Макияж</h2>
-
+  <h2 class="general-title montserrat-test">Ногтевой сервис</h2>
   <div class="product-cards">
     <div class="product-card">
       <img src="img.png" alt="Place">
@@ -128,12 +85,83 @@
       <img src="img.png" alt="Place">
       <div class="btm-text">
         <p class="place-name">Название салона</p>
-        <p class="grey-small address">Адрес салона</p>
+        <p class="grey-small">Адрес салона</p>
+        <p class="rating">9.5 ★</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="img.png" alt="Place">
+      <div class="btm-text">
+        <p class="place-name">Название салона</p>
+        <p class="grey-small">Адрес салона</p>
+        <p class="rating">9.5 ★</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="img.png" alt="Place">
+      <div class="btm-text">
+        <p class="place-name">Название салона</p>
+        <p class="grey-small">Адрес салона</p>
         <p class="rating">9.5 ★</p>
       </div>
     </div>
   </div>
 </div>
+
+<div class="container">
+  <h2 class="general-title montserrat-test">Макияж</h2>
+  <div class="product-cards">
+    <div class="product-card">
+      <img src="img.png" alt="Place">
+      <div class="btm-text">
+        <p class="place-name">Название салона</p>
+        <p class="grey-small">Адрес салона</p>
+        <p class="rating">9.5 ★</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="img.png" alt="Place">
+      <div class="btm-text">
+        <p class="place-name">Название салона</p>
+        <p class="grey-small">Адрес салона</p>
+        <p class="rating">9.5 ★</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="img.png" alt="Place">
+      <div class="btm-text">
+        <p class="place-name">Название салона</p>
+        <p class="grey-small">Адрес салона</p>
+        <p class="rating">9.5 ★</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="img.png" alt="Place">
+      <div class="btm-text">
+        <p class="place-name">Название салона</p>
+        <p class="grey-small">Адрес салона</p>
+        <p class="rating">9.5 ★</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="img.png" alt="Place">
+      <div class="btm-text">
+        <p class="place-name">Название салона</p>
+        <p class="grey-small">Адрес салона</p>
+        <p class="rating">9.5 ★</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="img.png" alt="Place">
+      <div class="btm-text">
+        <p class="place-name">Название салона</p>
+        <p class="grey-small">Адрес салона</p>
+        <p class="rating">9.5 ★</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container">
   <h2 class="general-title montserrat-test">Последние отзывы</h2>
   <div class="review-cards">
@@ -149,9 +177,7 @@
         </div>
       </div>
       <div class="review-main">
-        <p>“Осталась очень довольна услугой покраски волос! Мастер учёл все мои пожелания, помог подобрать идеальный
-          оттенок и выполнил работу аккуратно. Цвет получился ровным, волосы после процедуры выглядят ухоженными и
-          блестящими. Спасибо за профессионализм и внимательное отношение!”</p>
+        <p>“Осталась очень довольна услугой покраски волос! Мастер учёл все мои пожелания, помог подобрать идеальный оттенок и выполнил работу аккуратно. Цвет получился ровным, волосы после процедуры выглядят ухоженными и блестящими. Спасибо за профессионализм и внимательное отношение!”</p>
       </div>
       <p class="grey-small review-bottom">Айзада Сатаева · 2 дня назад</p>
     </div>
@@ -167,9 +193,7 @@
         </div>
       </div>
       <div class="review-main">
-        <p>“Осталась очень довольна услугой покраски волос! Мастер учёл все мои пожелания, помог подобрать идеальный
-          оттенок и выполнил работу аккуратно. Цвет получился ровным, волосы после процедуры выглядят ухоженными и
-          блестящими. Спасибо за профессионализм и внимательное отношение!”</p>
+        <p>“Осталась очень довольна услугой покраски волос! Мастер учёл все мои пожелания, помог подобрать идеальный оттенок и выполнил работу аккуратно. Цвет получился ровным, волосы после процедуры выглядят ухоженными и блестящими. Спасибо за профессионализм и внимательное отношение!”</p>
       </div>
       <p class="grey-small review-bottom">Айзада Сатаева · 2 дня назад</p>
     </div>
@@ -185,14 +209,13 @@
         </div>
       </div>
       <div class="review-main">
-        <p>“Осталась очень довольна услугой покраски волос! Мастер учёл все мои пожелания, помог подобрать идеальный
-          оттенок и выполнил работу аккуратно. Цвет получился ровным, волосы после процедуры выглядят ухоженными и
-          блестящими. Спасибо за профессионализм и внимательное отношение!”</p>
+        <p>“Осталась очень довольна услугой покраски волос! Мастер учёл все мои пожелания, помог подобрать идеальный оттенок и выполнил работу аккуратно. Цвет получился ровным, волосы после процедуры выглядят ухоженными и блестящими. Спасибо за профессионализм и внимательное отношение!”</p>
       </div>
       <p class="grey-small review-bottom">Айзада Сатаева · 2 дня назад</p>
     </div>
   </div>
 </div>
+
 <div class="container">
   <div class="business-banner">
     <div class="business-left">
@@ -202,5 +225,3 @@
     <button class="btn" (click)="business()">Подробнее</button>
   </div>
 </div>
-
-<!--<app-footer></app-footer>-->
