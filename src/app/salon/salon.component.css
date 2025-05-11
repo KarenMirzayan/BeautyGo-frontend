@@ -218,7 +218,7 @@ h3{
 
     .rating{
         margin-top: 24px;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 350;
     }
 }
@@ -292,7 +292,7 @@ h3{
 
     .stars{
         margin-left: auto;
-        width:105px;
+        margin-right: 0;
     }
 }
 

@@ -15,14 +15,10 @@
       <button class="clear-btn" (click)="clearFilters()">Очистить</button>
       <h3 class="inter-common">Рейтинг</h3>
       <div class="filter-group last-mrg">
-        <label><input type="checkbox" [checked]="ratingFilters.length === 0" (change)="toggleRatingFilter(null)"> С
-          любым рейтингом</label>
-        <label><input type="checkbox" [checked]="ratingFilters.includes(3)" (change)="toggleRatingFilter(3)"> С
-          рейтингом 3 и выше</label>
-        <label><input type="checkbox" [checked]="ratingFilters.includes(4)" (change)="toggleRatingFilter(4)"> С
-          рейтингом 4 и выше</label>
-        <label><input type="checkbox" [checked]="ratingFilters.includes(5)" (change)="toggleRatingFilter(5)"> С
-          рейтингом 5 и выше</label>
+        <label><input type="checkbox" [checked]="ratingFilters.length === 0" (change)="toggleRatingFilter(null)"> С любым рейтингом</label>
+        <label><input type="checkbox" [checked]="ratingFilters.includes(3)" (change)="toggleRatingFilter(3)"> С рейтингом 3 и выше</label>
+        <label><input type="checkbox" [checked]="ratingFilters.includes(4)" (change)="toggleRatingFilter(4)"> С рейтингом 4 и выше</label>
+        <label><input type="checkbox" [checked]="ratingFilters.includes(5)" (change)="toggleRatingFilter(5)"> С рейтингом 5 и выше</label>
       </div>
       <button class="apply-btn" (click)="applyFiltersAndSort()">Применить</button>
     </div>
@@ -41,11 +37,11 @@
       <div class="cards" *ngIf="filteredBusinesses.length > 0; else noResults">
         <div class="product-card" *ngFor="let business of filteredBusinesses">
           <a [routerLink]="['/salon', business.id]">
-            <img [src]="'img.png'" alt="Салон красоты">
+            <img [src]="getBusinessImage(business)" alt="Салон красоты">
             <div class="btm-text">
               <p class="place-name">{{ business.name }}</p>
               <p class="grey-small">{{ business.address }}</p>
-              <p class="rating">{{ (business.rating || 0).toFixed(1) }} ★</p>
+              <p class="rating">{{ business.averageRating !== undefined ? business.averageRating + ' ★' : 'Оценок нет' }}</p>
             </div>
           </a>
         </div>

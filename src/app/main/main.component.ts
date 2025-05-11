@@ -5,7 +5,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Business } from '../models';
 import { BusinessService } from '../business.service';
-import {CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -35,9 +35,12 @@ export class MainComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.businessService.getAllBusinesses().subscribe((businesses) => {
-      this.businesses = businesses;
-      this.fetchBusinessRatings();
+    this.businessService.getAllBusinesses().subscribe({
+      next: (businesses) => {
+        this.businesses = businesses;
+        this.fetchBusinessRatings();
+      },
+      error: (err) => console.error('Error fetching businesses:', err),
     });
   }
 
@@ -46,7 +49,7 @@ export class MainComponent implements OnInit {
       this.businessService.getBusinessRatingStats(business.id).pipe(
         map((stats) => ({
           ...business,
-          averageRating: stats.averageRating, // Default to 0 if no reviews
+          averageRating: stats.averageRating ? Number(stats.averageRating.toFixed(1)) : undefined,
         }))
       )
     );
@@ -69,5 +72,9 @@ export class MainComponent implements OnInit {
 
   business() {
     this.router.navigate(['business/']);
+  }
+
+  getBusinessImage(business: Business): string {
+    return business.imageUrls && business.imageUrls.length > 0 ? business.imageUrls[0] : 'img.png';
   }
 }

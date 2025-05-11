@@ -42,11 +42,11 @@
   <div class="product-cards">
     <div class="product-card" *ngFor="let business of businesses">
       <a routerLink="/salon/{{business.id}}">
-        <img src="img.png" alt="Place">
+        <img [src]="getBusinessImage(business)" alt="Place">
         <div class="btm-text">
           <p class="place-name">{{business.name}}</p>
           <p class="grey-small">{{business.address}}</p>
-          <p class="rating">{{business.averageRating ? (business.averageRating) + ' ★' : 'Оценок нет'}}</p>
+          <p class="rating">{{business.averageRating !== undefined ? business.averageRating + ' ★' : 'Оценок нет'}}</p>
         </div>
       </a>
     </div>
@@ -56,14 +56,13 @@
 <div class="container">
   <h2 class="general-title montserrat-test">Ногтевой сервис</h2>
   <div class="product-cards">
-    <!-- Placeholder: Fetch businesses with "Ногтевой сервис" category -->
     <div class="product-card" *ngFor="let business of businesses">
       <a routerLink="/salon/{{business.id}}">
-        <img src="img.png" alt="Place">
+        <img [src]="getBusinessImage(business)" alt="Place">
         <div class="btm-text">
           <p class="place-name">{{business.name}}</p>
           <p class="grey-small">{{business.address}}</p>
-          <p class="rating">{{business.averageRating ? (business.averageRating) + ' ★' : 'Оценок нет'}}</p>
+          <p class="rating">{{business.averageRating !== undefined ? business.averageRating + ' ★' : 'Оценок нет'}}</p>
         </div>
       </a>
     </div>
@@ -73,14 +72,13 @@
 <div class="container">
   <h2 class="general-title montserrat-test">Макияж</h2>
   <div class="product-cards">
-    <!-- Placeholder: Fetch businesses with "Макияж" category -->
     <div class="product-card" *ngFor="let business of businesses">
       <a routerLink="/salon/{{business.id}}">
-        <img src="img.png" alt="Place">
+        <img [src]="getBusinessImage(business)" alt="Place">
         <div class="btm-text">
           <p class="place-name">{{business.name}}</p>
           <p class="grey-small">{{business.address}}</p>
-          <p class="rating">{{business.averageRating ? (business.averageRating) + ' ★' : 'Оценок нет'}}</p>
+          <p class="rating">{{business.averageRating !== undefined ? business.averageRating + ' ★' : 'Оценок нет'}}</p>
         </div>
       </a>
     </div>

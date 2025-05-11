@@ -3,11 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { DropdownComponent } from '../dropdown/dropdown.component';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BusinessService } from '../business.service';
 import { Business } from '../models';
 import { CommonModule } from '@angular/common';
-import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { forkJoin } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
@@ -19,10 +21,10 @@ import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './search.component.html',
-  styleUrl: './search.component.css'
+  styleUrl: './search.component.css',
 })
 export class SearchComponent implements OnInit {
   orderby = ['По названию', 'По рейтингу'];
@@ -39,8 +41,7 @@ export class SearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Get query from URL
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const query = params.get('query');
       if (query) {
         this.query = decodeURIComponent(query);
@@ -54,18 +55,37 @@ export class SearchComponent implements OnInit {
     this.query = query;
     this.businessService.searchBusiness(query).subscribe({
       next: (businesses) => {
-        this.businesses = businesses.map(b => ({
-          ...b,
-          rating: b.rating ?? 0 // Default to 0 if rating is undefined
-        }));
-        this.businesses.sort((a, b) => a.name.localeCompare(b.name));
-        this.applyFiltersAndSort();
+        this.businesses = businesses;
+        this.fetchBusinessRatings();
       },
       error: (err) => {
         console.error('Error searching businesses:', err);
         this.businesses = [];
         this.filteredBusinesses = [];
-      }
+      },
+    });
+  }
+
+  fetchBusinessRatings() {
+    const ratingObservables = this.businesses.map((business) =>
+      this.businessService.getBusinessRatingStats(business.id).pipe(
+        map((stats) => ({
+          ...business,
+          averageRating: stats.averageRating ? Number(stats.averageRating.toFixed(1)) : undefined,
+          imageUrls: business.imageUrls || [], // Ensure imageUrls is defined
+        }))
+      )
+    );
+
+    forkJoin(ratingObservables).subscribe({
+      next: (updatedBusinesses) => {
+        this.businesses = updatedBusinesses;
+        this.applyFiltersAndSort();
+      },
+      error: (err) => {
+        console.error('Error fetching business ratings:', err);
+        this.applyFiltersAndSort();
+      },
     });
   }
 
@@ -73,7 +93,6 @@ export class SearchComponent implements OnInit {
     const query = this.searchQuery.value?.trim();
     if (query) {
       this.router.navigate([`/search/${encodeURIComponent(query)}`]);
-      // No need to call searchBusinesses here; ngOnInit will handle it via route change
     }
   }
 
@@ -87,12 +106,12 @@ export class SearchComponent implements OnInit {
     // Apply rating filters
     if (this.ratingFilters.length > 0) {
       const minRating = Math.max(...this.ratingFilters);
-      filtered = filtered.filter(b => b.rating >= minRating);
+      filtered = filtered.filter((b) => b.averageRating !== undefined && b.averageRating >= minRating);
     }
 
     // Sort
     if (order === 'По рейтингу') {
-      filtered.sort((a, b) => b.rating - a.rating);
+      filtered.sort((a, b) => (b.averageRating || 0) - (a.averageRating || 0));
     } else {
       filtered.sort((a, b) => a.name.localeCompare(b.name));
     }
@@ -102,11 +121,10 @@ export class SearchComponent implements OnInit {
 
   toggleRatingFilter(rating: number | null): void {
     if (rating === null) {
-      // "С любым рейтингом" clears all filters
       this.ratingFilters = [];
     } else {
       if (this.ratingFilters.includes(rating)) {
-        this.ratingFilters = this.ratingFilters.filter(r => r !== rating);
+        this.ratingFilters = this.ratingFilters.filter((r) => r !== rating);
       } else {
         this.ratingFilters.push(rating);
       }
@@ -117,5 +135,9 @@ export class SearchComponent implements OnInit {
   clearFilters(): void {
     this.ratingFilters = [];
     this.applyFiltersAndSort();
+  }
+
+  getBusinessImage(business: Business): string {
+    return business.imageUrls && business.imageUrls.length > 0 ? business.imageUrls[0] : 'img.png';
   }
 }

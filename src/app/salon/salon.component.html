@@ -1,10 +1,11 @@
+<!-- src/app/salon/salon.component.html -->
 <div class="box" *ngIf="business">
   <div class="info thin-border">
     <div class="description">
       <h3 class="name">{{ business.name }}</h3>
       <div class="rate">
-        <p class="rating name">4.0 ★</p>
-        <p class="thin-font">300 оценок</p>
+        <p class="rating name">{{ business.averageRating !== undefined ? business.averageRating + ' ★' : 'Оценок нет' }}</p>
+        <p class="thin-font">{{ totalReviews }} оценок</p>
       </div>
 
       <div class="contacts">
@@ -30,13 +31,11 @@
   </div>
 
   <div class="photos">
-    <img class="main-img" src="img.png" alt="Салон красоты">
+    <img class="main-img" [src]="getBusinessImage()" alt="Салон красоты">
     <div class="carousel">
       <img class="arrow" src="arrow_left.svg" alt="Arrow left">
       <div class="carousel-photos">
-        <img class="carousel-img" src="img.png" alt="Салон красоты">
-        <img class="carousel-img" src="img.png" alt="Салон красоты">
-        <img class="carousel-img" src="img.png" alt="Салон красоты">
+        <img class="carousel-img" *ngFor="let image of getCarouselImages()" [src]="image" alt="Салон красоты">
       </div>
       <img class="arrow" src="arrow_right.svg" alt="Arrow right">
     </div>
@@ -45,11 +44,6 @@
 
 <div class="services">
   <h2 class="general-title montserrat-test">Услуги</h2>
-<!--  <div class="search-bar">-->
-<!--    <img src="search.svg" alt="Search" class="search-img">-->
-<!--    <button class="search-btn">Искать</button>-->
-<!--  </div>-->
-
   <div class="service" *ngFor="let topic of groupedServices | keyvalue">
     <h2>{{topic.key}}</h2>
     <div *ngFor="let service of topic.value">
@@ -70,32 +64,25 @@
 
 <div class="reviews">
   <h2 class="general-title montserrat-test">Отзывы</h2>
-  <p class="inter-common" class="rating">★ Рейтинг: 4.0/5.0</p>
-  <div class="buttons">
-    <button class="review-btn inter-common">Все</button>
-    <button class="review-btn inter-common">Положительные</button>
-    <button class="review-btn inter-common">Отрицательные</button>
-  </div>
+  <p class="inter-common rating">Рейтинг: {{ business.averageRating !== undefined ? business.averageRating + '/5' : 'Оценок нет' }}★</p>
 
   <div class="review-list">
-
-    <div class="review thin-border">
-        <div class="profile">
-          <img class="profile-img" src="profile.jpg" alt="Profile">
-          <p class="inter-common thin-font">Айзада</p>
-          <img class="stars" src="stars.svg" alt="5 stars">
-        </div>
-
-        <p class="comment thin-font">“Осталась очень довольна услугой покраски волос! Мастер учёл все мои пожелания, помог подобрать идеальный оттенок и выполнил работу аккуратно. Цвет получился ровным, волосы после процедуры выглядят ухоженными и блестящими. Спасибо за профессионализм и внимательное отношение! Обязательно приду ещё раз.”</p>
-        <p class="date thin-font">10.10.2010</p>
+    <div class="review thin-border" *ngFor="let review of reviews">
+      <div class="profile">
+        <img class="profile-img" src="pfp_placeholder.png" alt="Profile">
+        <p class="inter-common thin-font">{{ review.customerName }}</p>
+        <p class="stars">{{ getStarString(review.rating) }}</p>
+      </div>
+      <p class="comment thin-font">{{ review.comment || 'Без комментария' }}</p>
+      <p class="date thin-font">{{ formatReviewDate(review.createdAt) }}</p>
     </div>
-
+    <div class="review thin-border" *ngIf="reviews.length === 0">
+      <p class="inter-common thin-font">Отзывов пока нет</p>
+    </div>
   </div>
 
   <div class="about">
     <h2 class="general-title montserrat-test">О нас</h2>
-    <p>{{this.business?.description}}</p>
+    <p>{{ this.business?.description || 'Описание отсутствует' }}</p>
   </div>
-
 </div>
-

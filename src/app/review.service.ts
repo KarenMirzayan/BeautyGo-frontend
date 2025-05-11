@@ -28,4 +28,8 @@ export class ReviewService {
   deleteReview(id:number) {
     return this.http.delete<ReviewDto>(`${this.apiUrl}/${id}`);
   }
+
+  getBusinessReviews(id:number) {
+    return this.http.get<ReviewDto[]>(`${this.apiUrl}/business/${id}`);
+  }
 }
