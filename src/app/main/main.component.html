@@ -1,4 +1,3 @@
-<!-- src/app/main/main.component.html -->
 <div class="banner">
   <img src="img_1.png" alt="Banner image">
   <h1 class="montserrat-test banner-text">Онлайн-запись на услуги в сфере красоты</h1>
@@ -42,12 +41,12 @@
   <h2 class="general-title montserrat-test">Маникюр</h2>
   <div class="product-cards">
     <div class="product-card" *ngFor="let business of businesses">
-      <a routerLink="./salon/{{business.id}}">
+      <a routerLink="/salon/{{business.id}}">
         <img src="img.png" alt="Place">
         <div class="btm-text">
           <p class="place-name">{{business.name}}</p>
           <p class="grey-small">{{business.address}}</p>
-          <p class="rating">9.5 ★</p>
+          <p class="rating">{{business.averageRating ? (business.averageRating) + ' ★' : 'Оценок нет'}}</p>
         </div>
       </a>
     </div>
@@ -57,53 +56,16 @@
 <div class="container">
   <h2 class="general-title montserrat-test">Ногтевой сервис</h2>
   <div class="product-cards">
-    <div class="product-card">
-      <img src="img.png" alt="Place">
-      <div class="btm-text">
-        <p class="place-name">Название салона</p>
-        <p class="grey-small">Адрес салона</p>
-        <p class="rating">9.5 ★</p>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="img.png" alt="Place">
-      <div class="btm-text">
-        <p class="place-name">Название салона</p>
-        <p class="grey-small">Адрес салона</p>
-        <p class="rating">9.5 ★</p>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="img.png" alt="Place">
-      <div class="btm-text">
-        <p class="place-name">Название салона</p>
-        <p class="grey-small">Адрес салона</p>
-        <p class="rating">9.5 ★</p>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="img.png" alt="Place">
-      <div class="btm-text">
-        <p class="place-name">Название салона</p>
-        <p class="grey-small">Адрес салона</p>
-        <p class="rating">9.5 ★</p>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="img.png" alt="Place">
-      <div class="btm-text">
-        <p class="place-name">Название салона</p>
-        <p class="grey-small">Адрес салона</p>
-        <p class="rating">9.5 ★</p>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="img.png" alt="Place">
-      <div class="btm-text">
-        <p class="place-name">Название салона</p>
-        <p class="grey-small">Адрес салона</p>
-        <p class="rating">9.5 ★</p>
-      </div>
+    <!-- Placeholder: Fetch businesses with "Ногтевой сервис" category -->
+    <div class="product-card" *ngFor="let business of businesses">
+      <a routerLink="/salon/{{business.id}}">
+        <img src="img.png" alt="Place">
+        <div class="btm-text">
+          <p class="place-name">{{business.name}}</p>
+          <p class="grey-small">{{business.address}}</p>
+          <p class="rating">{{business.averageRating ? (business.averageRating) + ' ★' : 'Оценок нет'}}</p>
+        </div>
+      </a>
     </div>
   </div>
 </div>
@@ -111,53 +73,16 @@
 <div class="container">
   <h2 class="general-title montserrat-test">Макияж</h2>
   <div class="product-cards">
-    <div class="product-card">
-      <img src="img.png" alt="Place">
-      <div class="btm-text">
-        <p class="place-name">Название салона</p>
-        <p class="grey-small">Адрес салона</p>
-        <p class="rating">9.5 ★</p>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="img.png" alt="Place">
-      <div class="btm-text">
-        <p class="place-name">Название салона</p>
-        <p class="grey-small">Адрес салона</p>
-        <p class="rating">9.5 ★</p>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="img.png" alt="Place">
-      <div class="btm-text">
-        <p class="place-name">Название салона</p>
-        <p class="grey-small">Адрес салона</p>
-        <p class="rating">9.5 ★</p>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="img.png" alt="Place">
-      <div class="btm-text">
-        <p class="place-name">Название салона</p>
-        <p class="grey-small">Адрес салона</p>
-        <p class="rating">9.5 ★</p>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="img.png" alt="Place">
-      <div class="btm-text">
-        <p class="place-name">Название салона</p>
-        <p class="grey-small">Адрес салона</p>
-        <p class="rating">9.5 ★</p>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="img.png" alt="Place">
-      <div class="btm-text">
-        <p class="place-name">Название салона</p>
-        <p class="grey-small">Адрес салона</p>
-        <p class="rating">9.5 ★</p>
-      </div>
+    <!-- Placeholder: Fetch businesses with "Макияж" category -->
+    <div class="product-card" *ngFor="let business of businesses">
+      <a routerLink="/salon/{{business.id}}">
+        <img src="img.png" alt="Place">
+        <div class="btm-text">
+          <p class="place-name">{{business.name}}</p>
+          <p class="grey-small">{{business.address}}</p>
+          <p class="rating">{{business.averageRating ? (business.averageRating) + ' ★' : 'Оценок нет'}}</p>
+        </div>
+      </a>
     </div>
   </div>
 </div>

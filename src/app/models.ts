@@ -10,6 +10,7 @@ export interface Business {
   services: Service[];
   rating: number;
   imageUrls?: string[];
+  averageRating?: number;
 }
 
 export interface Service {

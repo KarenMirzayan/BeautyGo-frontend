@@ -1,21 +1,18 @@
-FROM node:latest as build
+# Build Stage
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
 COPY package*.json ./
-
 RUN npm ci
 
-RUN npm install -g @angular/cli
-
 COPY . .
+RUN npx ng build --configuration=production
 
-RUN npm run build --configuration=production
-
-FROM nginx:latest
+# Serve Stage
+FROM nginx:alpine
 
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-
 COPY --from=build /app/dist/beauty-go/browser /usr/share/nginx/html
 
 EXPOSE 80
