@@ -35,7 +35,7 @@ export class EmployeeJournalComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('staffId');
-      this.staffId = 19;
+      this.staffId = 1;
       console.log(this.staffId)
       this.fetchReservations();
     });
